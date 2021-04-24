@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="ContentDescription"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/wechat_common_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_top_bar"
+        android:background="@color/common_top_bar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/tab_contacts"
+            android:textColor="@color/common_top_title"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_general"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/contacts_layout_height"
+        android:background="@drawable/btn_list_item_bg"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/sdv_new_friends"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:src="@mipmap/icon_contacts_new_friends" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@id/sdv_new_friends"
+            android:text="@string/contact1"
+            android:textColor="#353535"
+            android:textSize="@dimen/contacts_text_size" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginStart="60dp"
+        android:background="#d9d9d9" />
+
+    <RelativeLayout
+        android:id="@+id/relative_in_house"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/contacts_layout_height"
+        android:background="@drawable/btn_list_item_bg"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/sdv_group_chats"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:src="@mipmap/icon_contacts_group_chats"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@id/sdv_group_chats"
+            android:text="@string/contact2"
+            android:textColor="#353535"
+            android:textSize="@dimen/contacts_text_size" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginStart="60dp"
+        android:background="#d9d9d9" />
+
+    <RelativeLayout
+        android:id="@+id/relative_outside"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/contacts_layout_height"
+        android:background="@drawable/btn_list_item_bg"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/sdv_tags"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:src="@mipmap/icon_contacts_tags"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@id/sdv_tags"
+            android:text="@string/contact3"
+            android:textColor="#353535"
+            android:textSize="@dimen/contacts_text_size" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginStart="60dp"
+        android:background="@color/common_divider_grey" />
+
+    <RelativeLayout
+        android:id="@+id/relative_noise"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/contacts_layout_height"
+        android:background="@drawable/btn_list_item_bg"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/sdv_contacts_official_accounts"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:src="@mipmap/icon_contacts_official_accounts"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@id/sdv_contacts_official_accounts"
+            android:text="@string/contact4"
+            android:textColor="#353535"
+            android:textSize="@dimen/contacts_text_size" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_sound_detect"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/contacts_layout_height"
+        android:background="@drawable/btn_list_item_bg"
+        android:layout_marginTop="@dimen/me_thick_divider_height"
+
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/image_view_6"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:src="@mipmap/alert"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@id/image_view_6"
+            android:text="@string/contact6"
+            android:textColor="#353535"
+            android:textSize="@dimen/contacts_text_size" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_asrlong"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/contacts_layout_height"
+        android:background="@drawable/btn_list_item_bg"
+        android:layout_marginTop="@dimen/me_thick_divider_height"
+
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/image_view_5"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:src="@mipmap/vip"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@id/image_view_5"
+            android:text="@string/contact5"
+            android:textColor="#353535"
+            android:textSize="@dimen/contacts_text_size"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+</LinearLayout>

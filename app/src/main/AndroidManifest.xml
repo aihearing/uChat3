@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.reapex.sv" >
+    <!-- Normal  一些系统要求的权限，如访问网络等 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- Optional for location -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
+    <!-- Dangerous  一些系统要求的权限，如访问网络等 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 头像需要 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="com.huawei.mlkit.asr.permission" />
+
+    <permission
+        android:name="com.huawei.mlkit.asr.permission"
+        android:label="ASR" />
+
+    <application
+        android:name=".MyApp"
+        android:allowBackup="true"
+        android:fullBackupContent="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="q" >
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity
+            android:name=".Welcome1"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Welcome2Earth"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageTranslucentTheme" />
+        <activity
+            android:name=".Login"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageTranslucentTheme" />
+        <activity
+            android:name=".Register"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageTranslucentTheme" />
+        <activity
+            android:name=".Welcome3Main"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageTranslucentTheme" />
+        <activity
+            android:name=".sounddect.SoundDectActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/ChatActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".asrshort.ChatRecycler"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/ChatActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".asrlong.ChatVIP"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/ChatActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".frag3me.Setting"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageTranslucentTheme" />
+        <activity
+            android:name=".frag3me.AccountSecurity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageTranslucentTheme" />
+        <activity
+            android:name=".frag3me.Frag3MeProfile"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageTranslucentTheme" />
+        <activity
+            android:name=".frag3me.CloseAccount"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageTranslucentTheme" />
+        <activity
+            android:name=".frag3me.MeMore"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageTranslucentTheme" />
+        <activity
+            android:name=".frag3me.ChangeName"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageTranslucentTheme" />
+        <activity
+            android:name=".frag3me.MeMoreRegion"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageTranslucentTheme" />
+        <activity
+            android:name=".frag3me.MeMoreSignature"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageTranslucentTheme" />
+        <activity
+            android:name=".frag3me.MeMoreGender"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageTranslucentTheme" />
+        <activity
+            android:name=".frag3me.About"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageTranslucentTheme" />
+        <activity
+            android:name=".MyWeb"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageTranslucentTheme" />
+        <activity
+            android:name=".frag3me.SVQRCode"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageTranslucentTheme" />
+        <activity
+            android:name=".frag3me.ModifyPasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageTranslucentTheme" />
+
+        <meta-data
+            android:name="install_channel"
+            android:value="AppGallery">
+        </meta-data>
+
+    </application>
+
+</manifest>

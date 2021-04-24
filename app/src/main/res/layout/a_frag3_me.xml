@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="ContentDescription"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/wechat_common_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/relative_me_top"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="#ffffff"
+        android:clickable="true"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:focusable="true">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_view_avatar"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/roundedCornersImageView"
+            tools:src="@mipmap/default_user_avatar" />
+
+        <RelativeLayout
+            android:id="@+id/ll_name"
+            android:layout_width="wrap_content"
+            android:layout_height="64dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="@dimen/me_layout_padding_left"
+            android:layout_toEndOf="@id/image_view_avatar">
+
+            <TextView
+                android:id="@+id/text_view_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/company_name"
+                android:textColor="#353535"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_view_wx_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="@string/wx_id"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="52dp"
+                android:src="@mipmap/icon_qr_code" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="16dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="8dp"
+                android:src="@mipmap/icon_right_arrow" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_layout_upgrade"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/discover_layout_height"
+        android:layout_marginTop="@dimen/me_thick_divider_height"
+        android:background="@drawable/btn_list_item_bg"
+        android:clickable="true"
+        android:paddingStart="@dimen/discover_layout_padding_left">
+
+        <ImageView
+            android:id="@+id/iv_moments"
+            android:layout_width="@dimen/discover_icon_width"
+            android:layout_height="@dimen/discover_icon_height"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/discover_icon_margin_left"
+            android:src="@mipmap/icon_discover_moments" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/discover_text_margin_left"
+            android:layout_toEndOf="@id/iv_moments"
+            android:text="@string/moments"
+            android:textColor="@color/common_text_color_black"
+            android:textSize="@dimen/discover_text_size" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:src="@mipmap/icon_right_arrow" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/me_divider_margin_left"
+            android:background="@color/common_divider_grey" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_layout_account_security"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/me_layout_height"
+        android:layout_marginTop="@dimen/me_thick_divider_height"
+        android:background="@drawable/btn_list_item_bg"
+        android:clickable="true"
+        android:paddingStart="@dimen/me_layout_padding_left">
+
+        <ImageView
+            android:id="@+id/iv_wechat_pay"
+            android:layout_width="@dimen/me_icon_width"
+            android:layout_height="@dimen/me_icon_height"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/me_icon_margin_left"
+            android:src="@mipmap/icon_me_wechat_pay" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/me_text_margin_left"
+            android:layout_toEndOf="@id/iv_wechat_pay"
+            android:text="@string/f3_account_security"
+            android:textColor="#353535"
+            android:textSize="@dimen/setting_text_size" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:src="@mipmap/icon_right_arrow" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_layout_about"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/me_layout_height"
+        android:layout_marginTop="@dimen/me_thick_divider_height"
+        android:background="@drawable/btn_list_item_bg"
+        android:clickable="true"
+        android:paddingStart="@dimen/me_layout_padding_left">
+
+        <ImageView
+            android:id="@+id/iv_settings"
+            android:layout_width="@dimen/me_icon_width"
+            android:layout_height="@dimen/me_icon_height"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/me_icon_margin_left"
+            android:src="@mipmap/icon_discover_mini_programs" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/me_text_margin_left"
+            android:layout_toEndOf="@id/iv_settings"
+            android:text="@string/about"
+            android:textColor="#353535"
+            android:textSize="@dimen/me_text_size" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:src="@mipmap/icon_right_arrow" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/me_divider_margin_left"
+            android:background="@color/common_divider_grey" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_layout_help_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/me_layout_height"
+        android:background="@drawable/btn_list_item_bg"
+        android:clickable="true"
+        android:paddingStart="@dimen/me_layout_padding_left">
+
+        <ImageView
+            android:id="@+id/iv_logout1"
+            android:layout_width="@dimen/me_icon_width"
+            android:layout_height="@dimen/me_icon_height"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/me_icon_margin_left"
+            android:src="@mipmap/icon_me_sticker_gallery" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/me_text_margin_left"
+            android:layout_toEndOf="@id/iv_logout1"
+            android:text="@string/help_feedback"
+            android:textColor="#353535"
+            android:textSize="@dimen/me_text_size" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_layout_logout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/me_layout_height"
+        android:layout_marginTop="@dimen/me_thick_divider_height"
+        android:background="@drawable/btn_list_item_bg"
+        android:clickable="true"
+        android:paddingStart="@dimen/me_layout_padding_left">
+
+        <ImageView
+            android:id="@+id/iv_logout"
+            android:layout_width="@dimen/me_icon_width"
+            android:layout_height="@dimen/me_icon_height"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/me_icon_margin_left"
+            android:src="@mipmap/icon_me_settings" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/me_text_margin_left"
+            android:layout_toEndOf="@id/iv_logout"
+            android:text="@string/log_out"
+            android:textColor="#353535"
+            android:textSize="@dimen/me_text_size" />
+    </RelativeLayout>
+
+</LinearLayout>
