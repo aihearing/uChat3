@@ -1,19 +1,24 @@
 package com.reapex.sv;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.reapex.sv.asrlong.ChatVIP;
 import com.reapex.sv.db.AChatDB;
 import com.reapex.sv.frag3me.Frag3Me;
@@ -106,9 +111,30 @@ public class Welcome3Main extends BaseActivity {
             mIndex = 1;
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.wechat_common_bg));
         }else if(view.getId() == R.id.rl_discover){
-//            mIndex = 3;
-            Intent intent = new Intent(this , ChatVIP.class);
-            this.startActivity(intent);
+//            Intent intent = new Intent(this , ChatVIP.class);
+//            this.startActivity(intent);
+
+            EditText editText = new EditText(this);
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setTitle(getString(R.string.input_code));
+            dialog.setView(editText);
+            dialog.setCancelable(false);
+            dialog.setPositiveButton(getString(R.string.str_ok), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Snackbar sb = Snackbar.make(view, editText.getText().toString()+getString(R.string.code_wrong), Snackbar.LENGTH_SHORT);
+                    sb.getView().setBackgroundColor(Color.RED);
+                    sb.getView().findViewById(com.google.android.material.R.id.snackbar_text).setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    sb.setAnchorView(view.findViewById(R.id.relative_sound_detect));
+                    sb.show();
+                }
+            });
+            dialog.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {}
+            });
+            dialog.show();
+
         }else if(view.getId() == R.id.rl_me){
             mIndex = 2;
 //           StatusBarUtil.setStatusBarColor(MainActivity.this, R.color.bottom_text_color_normal);
