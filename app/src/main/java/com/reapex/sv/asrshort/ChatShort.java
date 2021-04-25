@@ -1,12 +1,17 @@
 package com.reapex.sv.asrshort;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
+import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.util.Log;
@@ -15,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 
@@ -30,9 +36,8 @@ import java.util.List;
 
 import static com.reapex.sv.asrshort.ShortASRManager.total6s;
 
-public class ChatRecycler extends BaseActivity implements View.OnClickListener {
+public class ChatShort extends BaseActivity implements View.OnClickListener {
     final String TAG = this.getClass().getSimpleName();
-    static final int REQUEST_CODE_VOICE = 5;
 
     private final ClassOnResultInterface oFromInterface = new ClassOnResultInterface();
     ShortASRManager oASRManagerRecording;         //huawei
@@ -42,39 +47,67 @@ public class ChatRecycler extends BaseActivity implements View.OnClickListener {
     AnimationDrawable animationRecording;
     MaterialButton mBtnStart, mBtnStop;
 
-    private EditText editText;
-
     String pUserId, pUserName;
     int pUserAvaR;
 
-    AMessage        aMsg;
+    AMessage aMsg;
     MyListViewAdapter aAdapter;
-    List<AMessage>  aList; // = new ArrayList<AMessage>();
-    ListView        listView;
+    List<AMessage> aList; // = new ArrayList<AMessage>();
+    ListView listView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a_chat);               //a_activity_chat is listview
-
-        pUserId   = getIntent().getStringExtra("from1");
+        pUserId = getIntent().getStringExtra("from1");
         pUserName = getIntent().getStringExtra("from2");
         pUserAvaR = getIntent().getIntExtra("from3", R.mipmap.bg_me_press); //default bg_me_press
 
         textViewRecording = findViewById(R.id.text_view_recording);
         imageViewRecording = findViewById(R.id.image_view_voice_recording_anim);
 
-        listView  = findViewById(R.id.list_view_message);
+        listView = findViewById(R.id.list_view_message);
         mBtnStart = findViewById(R.id.button_start);
-        mBtnStop  = findViewById(R.id.button_stop);
+        mBtnStop = findViewById(R.id.button_stop);
         TextView mFromUserNameTv = findViewById(R.id.text_view_from_user_name);     //nickname 聊天窗口top
         mFromUserNameTv.setText(pUserName);
 
         AMessage msg1 = new AMessage("大家说，我听，您看。", "800", "你说", R.mipmap.default_user_avatar, false);
-        aList   = new ArrayList<>(Arrays.asList(msg1));
-        aAdapter= new MyListViewAdapter(ChatRecycler.this, aList);
+        aList = new ArrayList<>(Arrays.asList(msg1));
+        aAdapter = new MyListViewAdapter(ChatShort.this, aList);
         listView.setAdapter(aAdapter);
+
+        //permissions
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED){
+            Log.e(TAG, "permission granted.");
+        }else if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECORD_AUDIO)) {
+            showExplanation(getString(R.string.request_permission_title), getString(R.string.permission_rationale), Manifest.permission.RECORD_AUDIO);
+        } else {
+            requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO);
+        }
     }
+
+    private void showExplanation(String title, String message, final String permission) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title).setMessage(message).setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO);
+            }
+        });
+        builder.create().show();
+    }
+
+    // Register the permissions callback, which handles the user's response to the
+    // system permissions dialog. Save the return value, an instance of
+    // ActivityResultLauncher, as an instance variable.
+    private ActivityResultLauncher<String> requestPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+        if (isGranted) {
+            Toast.makeText(this, getString(R.string.request_permission_granted), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, getString(R.string.request_permission_record_audio), Toast.LENGTH_LONG).show();
+            finish();
+        }
+    });
 
     @Override
     public void onClick(View view) {
@@ -180,7 +213,7 @@ public class ChatRecycler extends BaseActivity implements View.OnClickListener {
     }
 
     private void showFailedDialog(int res) {
-        AlertDialog dialog = new AlertDialog.Builder(ChatRecycler.this)
+        AlertDialog dialog = new AlertDialog.Builder(ChatShort.this)
                 .setMessage(res)
                 .setPositiveButton(getString(R.string.str_ok), new DialogInterface.OnClickListener() {
                     @Override

@@ -146,14 +146,6 @@ public class Frag2DiscoverNotUse extends Fragment implements View.OnClickListene
         if (!ActivityCompat.shouldShowRequestPermissionRationale(context, permission)) {
             String content = "";
             // 非初次进入App且已授权
-            switch (requestCode) {
-                case Welcome3Main.REQUEST_CODE_CAMERA:
-                    content = getString(R.string.request_permission_camera);
-                    break;
-                case Welcome3Main.REQUEST_CODE_LOCATION:
-                    content = getString(R.string.request_permission_location);
-                    break;
-            }
             final ConfirmDialog mConfirmDialog = new ConfirmDialog(getActivity(), "权限申请",
                     content,
                     "去设置", "取消", context.getColor(R.color.navy_blue));

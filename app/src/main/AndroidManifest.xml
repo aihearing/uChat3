@@ -70,7 +70,7 @@
             android:theme="@style/ChatActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".asrshort.ChatRecycler"
+            android:name=".asrshort.ChatShort"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/ChatActivity"

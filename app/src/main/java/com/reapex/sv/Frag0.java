@@ -16,7 +16,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.reapex.sv.asrshort.ChatRecycler;
+import com.reapex.sv.asrshort.ChatShort;
 
 public class Frag0 extends Fragment  implements View.OnClickListener {
     static final String TAG = Frag0.class.getSimpleName();
@@ -119,7 +119,7 @@ public class Frag0 extends Fragment  implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(getActivity(), ChatRecycler.class);
+        Intent intent = new Intent(getActivity(), ChatShort.class);
         intent.putExtra("from1", getString(R.string.code1));
         intent.putExtra("from2", getString(R.string.contact1));
         intent.putExtra("from3", R.mipmap.icons81);
