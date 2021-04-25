@@ -2,6 +2,8 @@ package com.reapex.sv.frag3me;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -11,9 +13,11 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.TextPaint;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.snackbar.Snackbar;
@@ -28,6 +32,8 @@ import com.reapex.sv.widget.ConfirmDialog;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -41,12 +47,8 @@ import androidx.core.content.ContextCompat;
 
 public class Frag3MeProfile extends BaseActivity implements View.OnClickListener{
     final String TAG = this.getClass().getSimpleName();
-    private static final int UPDATE_AVATAR_BY_TAKE_CAMERA = 1;
     private static final int UPDATE_AVATAR_BY_ALBUM = 2;
     private static final int UPDATE_USER_NICK_NAME = 3;
-    private static final int UPDATE_USER_WX_ID = 4;
-
-    private String mImageName;
 
     MySP aSPUser = MySP.getInstance();
     View mLayout;
@@ -91,14 +93,39 @@ public class Frag3MeProfile extends BaseActivity implements View.OnClickListener
         }
     }
 
+    private void showExplanation(String title, String message, final String permission) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title).setMessage(message).setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE);
+            }
+        });
+        builder.create().show();
+    }
+
+    private ActivityResultLauncher<String> requestPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+        if (isGranted) {
+            Toast.makeText(this, getString(R.string.request_permission_granted_storage), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, getString(R.string.permission_rationale_storage), Toast.LENGTH_LONG).show();
+        }
+    });
+
+
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.relative_layout_avatar){
-
-            Intent intent;
-            intent = new Intent(Intent.ACTION_PICK, null);
-            intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-            startActivityForResult(intent, UPDATE_AVATAR_BY_ALBUM);
+            //permissions
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+                Intent intent;
+                intent = new Intent(Intent.ACTION_PICK, null);
+                intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+                startActivityForResult(intent, UPDATE_AVATAR_BY_ALBUM);
+            }else if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                showExplanation(getString(R.string.request_permission_title), getString(R.string.permission_rationale_storage), android.Manifest.permission.READ_EXTERNAL_STORAGE);
+            } else {
+                requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE);
+            }
         }else if((v.getId() == R.id.rl_nick_name) || (v.getId() == R.id.text_view_nick_name)) {
             startActivityForResult(new Intent(this, ChangeName.class), UPDATE_USER_NICK_NAME);
         }else if(v.getId() == R.id.rl_qr_code){

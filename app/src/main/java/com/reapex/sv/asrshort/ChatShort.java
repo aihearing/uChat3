@@ -16,7 +16,6 @@ import androidx.core.content.ContextCompat;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -81,7 +80,7 @@ public class ChatShort extends BaseActivity implements View.OnClickListener {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED){
             Log.e(TAG, "permission granted.");
         }else if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECORD_AUDIO)) {
-            showExplanation(getString(R.string.request_permission_title), getString(R.string.permission_rationale), Manifest.permission.RECORD_AUDIO);
+            showExplanation(getString(R.string.request_permission_title), getString(R.string.permission_rationale_record), Manifest.permission.RECORD_AUDIO);
         } else {
             requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO);
         }

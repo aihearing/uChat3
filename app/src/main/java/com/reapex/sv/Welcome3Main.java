@@ -1,8 +1,11 @@
 package com.reapex.sv;
 
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -64,6 +67,14 @@ public class Welcome3Main extends BaseActivity {
         window = this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 //        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            String avatar = (Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"
+                    + getResources().getResourcePackageName(R.mipmap.default_user_avatar) + "/"
+                    + getResources().getResourceTypeName(R.mipmap.default_user_avatar) + "/"
+                    + getResources().getResourceEntryName(R.mipmap.default_user_avatar))).toString();
+            MySP.getInstance().setUAvatar(avatar);
+        }
 
         db = AChatDB.getDatabase(this);
         initView();

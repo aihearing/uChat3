@@ -1,38 +1,24 @@
 package com.reapex.sv;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
-import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
 
 import com.huawei.hms.analytics.HiAnalytics;
 import com.huawei.hms.analytics.HiAnalyticsInstance;
 import com.huawei.hms.analytics.HiAnalyticsTools;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Welcome2Earth extends AppCompatActivity{
 
@@ -80,6 +66,19 @@ public class Welcome2Earth extends AppCompatActivity{
         if (null != dialog)        dialog.dismiss();
     }
 
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Dispatch onResume() to fragments.  Note that for better inter-operation
+     * with older versions of the platform, at the point of this call the
+     * fragments attached to the activity are <em>not</em> resumed.
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        onPause();
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -101,16 +100,20 @@ public class Welcome2Earth extends AppCompatActivity{
 
     private void disclaimer(){
 
-        // Linkify the message
-        final SpannableString s = new SpannableString(getString(R.string.disclaimer_content)); // msg should have url to enable clicking
-        Linkify.addLinks(s, Linkify.ALL);
-
         dialog = new AlertDialog.Builder(Welcome2Earth.this)
                 .setIcon(R.mipmap.ic_launcher)
                 .setMessage(R.string.disclaimer_content)
                 .setTitle(getString(R.string.disclaimer_title))
                 .setCancelable(false)
-                .setPositiveButton(this.getString(R.string.global_read), new DialogInterface.OnClickListener() {
+                .setNeutralButton(this.getString(R.string.disclaimer_button), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(Welcome2Earth.this, MyWeb.class);
+                        intent.putExtra("from", "agreement");
+                        startActivity(intent);
+                    }
+                })
+                .setPositiveButton(this.getString(R.string.agree), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         MySP.getInstance().setDisclaimer("AGREE");
@@ -124,8 +127,7 @@ public class Welcome2Earth extends AppCompatActivity{
                     }
                 }).create();
         dialog.show();
+        dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setTextColor(Color.LTGRAY);
         dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.LTGRAY);
-        // Make the textview clickable. Must be called after show()
-        ((TextView)dialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
     }
 }

@@ -27,12 +27,6 @@
     <string name="asr_back">欢迎回到见声看见\n点击按钮继续你说我看</string>
     <string name="asr_start_recording">本地系统正常\n请点击按钮开始</string>
 
-    <string name="permission_rationale">需要麦克风权限转化声音为文字，实现你说我看的功能。存储权限保存记录及头像。</string>
-    <string name="disclaimer_content">请您务必审慎阅读、充分理解《隐私政策》和《用户协议》各条款，包括但不限于：
-        \n\n系统请求麦克风录音权限，录音后进行语音识别。使用场景：1.你说-开始 2.语境-4选1-开始。系统请求存储权限，用以保存记录、设置及显示头像。您可以在“我-账号与安全-权限设置”中查看、变更、删除并管理您的授权。
-        \n\n请您在使用本应用前点击<a href="https://seeingvoice.gitee.io/privacy/">《隐私政策》</a>和<a href="https://seeingvoice.gitee.io/terms/">《用户协议》</a>了解详细信息。
-        \n\n如您同意，请点击“同意”开始接受我们的服务。</string>
-    <string name="disclaimer_title">用户协议和隐私政策</string>
 
     <string name="input_code">请输入邀请码：</string>
     <string name="code_wrong">非有效邀请码</string>
@@ -44,8 +38,10 @@
     <string name="four">4</string>
 
     <string name="uchat">你说，我看。</string>
-    <string name="global_read">已阅读并同意</string>
+    <string name="agree">同意</string>
     <string name="disagree">不同意</string>
+    <string name="disclaimer_button">协议和隐私</string>
+
     <string name="global_privacy_policy">《隐私政策》</string>
     <string name="global_agreement">《用户协议》</string>
     <string name="global_and">及</string>
@@ -268,9 +264,18 @@
     <!--  permission  -->
     <string name="request_permission">权限设置</string>
     <string name="request_permission_title">权限说明</string>
-    <string name="request_permission_granted">已授权，请体验。</string>
+    <string name="request_permission_granted_storage">已授权，请选择您喜欢的头像。</string>
+    <string name="request_permission_granted">已授权，请点击<b>开始</b>体验<b>你说我看</b>。</string>
     <string name="request_permission_storage">为确保接收到的图片、视频等内容能被正常浏览，听友需要申请手机存储权限。</string>
-    <string name="request_permission_record_audio">在我-账号与安全-权限设置-应用权限中，开启麦克风权限，以正常使用语音转文字、你说我看功能。</string>
+    <string name="request_permission_record_audio">请重新进入并点选<b>允许</b>。或者在我-账号与安全-权限设置-应用权限中，开启麦克风权限，以正常使用语音转文字、你说我看功能。</string>
+
+    <string name="permission_rationale_record">需要麦克风权限转化声音为文字，实现你说我看的功能。</string>
+    <string name="permission_rationale_storage">需要存储权限保存记录及头像。</string>
+    <string name="disclaimer_content">请您务必审慎阅读、充分理解隐私政策和用户协议各条款，包括但不限于：
+        \n\n系统请求麦克风录音权限，录音后进行语音识别。使用场景：你说-开始。系统请求存储权限，用以保存记录、设置及显示头像。您可以在“我-账号与安全-权限设置”中管理您的授权。
+        \n\n请您在使用本应用前点击<b>协议和隐私</b>了解详细信息。
+        \n\n阅读后，如您同意，请点击“同意”开始接受我们的服务。</string>
+    <string name="disclaimer_title">用户协议和隐私政策</string>
 
     <string name="moments">升级</string>
     <string name="scan">扫一扫</string>
