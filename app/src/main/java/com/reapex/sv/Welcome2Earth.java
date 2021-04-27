@@ -43,18 +43,18 @@ public class Welcome2Earth extends AppCompatActivity{
         animation.setDuration(1500);
         view.setAnimation(animation);
 
-        if(!MySP.getInstance().getDisclaimer().equals("AGREE")){
-            disclaimer();
-        }
+//        if(!MySP.getInstance().getDisclaimer().equals("AGREE")){
+//            disclaimer();
+//        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         if (dialog != null) { dialog.dismiss(); dialog = null;}
-        if(!MySP.getInstance().getDisclaimer().equals("AGREE")){
-            disclaimer();
-        }
+//        if(!MySP.getInstance().getDisclaimer().equals("AGREE")){
+//            disclaimer();
+//        }
     }
 
     /**

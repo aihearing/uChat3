@@ -45,7 +45,7 @@ public class Register extends BaseActivity implements View.OnClickListener {
     EditText  mNickNameEt, mPhoneEt, mPasswordEt;
     Button    mRegisterBtn;
 
-    boolean mAgree = true;   //是否同意协议
+    boolean mAgree;   //是否同意协议
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -153,15 +153,6 @@ public class Register extends BaseActivity implements View.OnClickListener {
             intent = new Intent(Intent.ACTION_PICK, null);
             intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
             startActivityForResult(intent, UPDATE_AVATAR_BY_ALBUM);
-        }else if (v.getId() == R.id.image_view_agree){
-            if (mAgree) {
-                mAgreementIv.setBackgroundResource(R.mipmap.icon_choose_false);
-                mAgree = false;
-            } else {
-                mAgreementIv.setBackgroundResource(R.mipmap.icon_choose_true);
-                mAgree = true;
-            }
-            checkSubmit();
         }else if (v.getId() == R.id.text_view_agreement){
             Intent intent = new Intent(this, MyWeb.class);
             intent.putExtra("from", "agreement");

@@ -220,7 +220,7 @@
         android:layout_centerVertical="true"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="16dp"
-        android:background="@mipmap/icon_choose_true"
+        android:background="@mipmap/icon_choose_false"
         app:layout_constraintBottom_toTopOf="@+id/btn_register"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="ContentDescription" />
