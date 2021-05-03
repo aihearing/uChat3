@@ -75,18 +75,14 @@ public class Chat_ListView extends BaseActivity implements View.OnClickListener 
             if (results != null && results.size() > 0) {
                 if (results.size() == 1) {
                     aMsg = new AMessage(results.get(0), pUserId, pUserName, pUserAvaR, true);
-                    if (ASRManager.howToLine.equals("onStartingOfSpeech")){
-                        Log.e(TAG, "howToLine: " + ASRManager.howToLine + " means 第一句话");
+                    if (ASRManager.howToLine.equals("onStartingOfSpeech")){ //Log.e(TAG, "howToLine: " + ASRManager.howToLine + " means 第一句话");
                         aList.add(aMsg);
-                    }else{
-                        Log.e(TAG, "partial2: "  + " howToLine: " + ASRManager.howToLine);
+                    }else{  //                        Log.e(TAG, "partial2: "  + " howToLine: " + ASRManager.howToLine);
                         aList.set(aList.size() - 1, aMsg);
                     }
                     aAdapter.notifyDataSetChanged();           // refresh ListView when new messages coming
                     listView.setSelection(aList.size());       // go to the end of the ListView
-                } else {
-                    Log.e(TAG, "NEVER COMING" );
-                }
+                } else {                          Log.e(TAG, "NEVER COMING" );                }
             }
         }
 
@@ -99,7 +95,12 @@ public class Chat_ListView extends BaseActivity implements View.OnClickListener 
         }
 
         @Override
-        public void onFinish() {            dismissCustomDialog();        }
+        public void onFinish() {
+            dismissCustomDialog();
+            Log.e(TAG, "---------------88 on finishing");
+//            stopASR("on6s");
+            oASRManager = new ASRManager(Chat_ListView.this, oASRCallBack);    //1第一次RecognizerSV
+        }
     }
 
 
@@ -135,15 +136,18 @@ public class Chat_ListView extends BaseActivity implements View.OnClickListener 
             oASRManager.destroy();
             oASRManager = null;
         }
-        if (animationRecording != null && animationRecording.isRunning()) {animationRecording.stop();}
-        mBtnStop.setVisibility(View.INVISIBLE);
-        mBtnStart.setVisibility(View.VISIBLE);
 
         if (src.equals("onPause")) {
+            if (animationRecording != null && animationRecording.isRunning()) {animationRecording.stop();}
+            mBtnStop.setVisibility(View.INVISIBLE);
+            mBtnStart.setVisibility(View.VISIBLE);
             textViewRecording.setText(getString(R.string.asr_back));
         }else if (src.equals("button_stop")) {
+            if (animationRecording != null && animationRecording.isRunning()) {animationRecording.stop();}
+            mBtnStop.setVisibility(View.INVISIBLE);
+            mBtnStart.setVisibility(View.VISIBLE);
             textViewRecording.setText(getString(R.string.asr_start_recording));
-        }else if (src.equals("onOneMinute")) {
+        }else if (src.equals("on6s")) {
             textViewRecording.setText(getString(R.string.asr_sleeping));
         }
     }

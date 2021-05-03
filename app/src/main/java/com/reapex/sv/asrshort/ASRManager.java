@@ -18,9 +18,9 @@ public class ASRManager {
     public static String howToLine;
     ASRListener mListenerSV;
 
-    protected Context         mContext;
-    protected MLAsrRecognizer oMLAsrRecognizer;
-    private CallBackInterface iCallBackInterface;  //2 接口变量
+    protected Context           mContext;
+    protected MLAsrRecognizer   oMLAsrRecognizer;
+    protected CallBackInterface iCallBackInterface;  //2 接口变量
 
     public ASRManager(Context pContext, CallBackInterface pInterface) {
         try {
@@ -62,6 +62,8 @@ public class ASRManager {
                 pResultsList.clear();
                 pResultsList.add(results.getString(MLAsrRecognizer.RESULTS_RECOGNIZED));
                 Log.e(TAG, "initReco " + "total6s: ");
+                if (iCallBackInterface != null) {
+                    iCallBackInterface.onFinish(); }
             }
         }
 
@@ -90,8 +92,6 @@ public class ASRManager {
         //STATE_WAITING //onState回调中的状态码，表示第一次发送数据时在弱网情况下。     //Constant Value：9
         public void onState(int state, Bundle params) {
             if (state == MLAsrConstants.STATE_NO_SOUND_TIMES_EXCEED) {
-                if (iCallBackInterface != null) {
-                    iCallBackInterface.onFinish(); }
                 Log.e(TAG, "onState: 6s内没有检测到结果3:" + state + " total6s: ");
             }else if(state == MLAsrConstants.STATE_NO_SOUND) {
                 Log.e(TAG, "onState: 3s内没有检测到没有说话2:" + state);
