@@ -27,7 +27,7 @@ import java.util.List;
 public class Chat_ListView extends BaseActivity implements View.OnClickListener {
     final String TAG = this.getClass().getSimpleName();
 
-    protected     ASRManager         oASRManager;                               //huawei
+    protected     ASRManager         oASRManager;
     private final ASRManagerCallBack oASRCallBack = new ASRManagerCallBack();
 
     TextView textViewRecording;
