@@ -1,0 +1,23 @@
+# ninja log v5
+12	306	641719434	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/energy.c.o	7200ae0adcd64c62
+15	348	641719434	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/get_scaling_square.c.o	d278290cedaa2866
+10	372	641719434	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/downsample_fast.c.o	279f66832aa27fa9
+19	436	641719434	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/division_operations.c.o	38c94db5b5a172d8
+22	458	641719434	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/resample_by_2_internal.c.o	67850f3e505c48e0
+41	479	641719434	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/min_max_operations.c.o	ba98bfe6aacbde4f
+24	534	641719434	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/resample_fractional.c.o	68564d422d25e9ac
+7	581	641719434	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/cross_correlation.c.o	583793721c499854
+328	645	641719434	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/resample_48khz.c.o	c6b4aa32807a7e9d
+348	777	641719434	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/spl_init.c.o	86c9cc27a1da161c
+458	788	641719434	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_gmm.c.o	9eda30e23bcd9083
+480	822	641719434	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_filterbank.c.o	567d0727c853782f
+534	838	641719434	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_sp.c.o	36c056547d14301b
+372	907	641719435	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_core.c.o	ebed2826f80961b
+645	932	641719435	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vector_scaling_operations.c.o	4212ae3e604a0efe
+581	1011	641719435	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/webrtc_vad.c.o	d3118af96098e0e6
+0	1242	641719435	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	cca3eb95228b05bf
+5	1590	641719435	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/checks.cc.o	db8305003a366ed0
+436	1705	641719435	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad.cc.o	2070084a9621f93c
+1706	2108	641719436	../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libnative-lib.so	f73b4a7cc796acc6
+40	1562	641750258	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	cca3eb95228b05bf
+1562	2725	641750259	../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libnative-lib.so	f73b4a7cc796acc6

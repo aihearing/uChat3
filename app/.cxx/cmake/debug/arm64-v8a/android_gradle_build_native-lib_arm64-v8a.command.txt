@@ -1,0 +1,7 @@
+Executable : D:\Program\Android\SDK\cmake\3.10.2.4988404\bin\ninja.exe
+arguments : 
+-C
+A:\ASCode\uChat3\app\.cxx\cmake\debug\arm64-v8a
+native-lib
+jvmArgs : 
+
