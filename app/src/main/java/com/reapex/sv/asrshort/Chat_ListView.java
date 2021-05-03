@@ -69,11 +69,44 @@ public class Chat_ListView extends BaseActivity implements View.OnClickListener 
         listView.setAdapter(aAdapter);
     }
 
+    private class ASRManagerCallBack implements ASRManager.CallBackInterface {
+        @Override
+        public void onResults(ArrayList<String> results) {
+            if (results != null && results.size() > 0) {
+                if (results.size() == 1) {
+                    aMsg = new AMessage(results.get(0), pUserId, pUserName, pUserAvaR, true);
+                    if (ASRManager.howToLine.equals("onStartingOfSpeech")){
+                        Log.e(TAG, "howToLine: " + ASRManager.howToLine + " means 第一句话");
+                        aList.add(aMsg);
+                    }else{
+                        Log.e(TAG, "partial2: "  + " howToLine: " + ASRManager.howToLine);
+                        aList.set(aList.size() - 1, aMsg);
+                    }
+                    aAdapter.notifyDataSetChanged();           // refresh ListView when new messages coming
+                    listView.setSelection(aList.size());       // go to the end of the ListView
+                } else {
+                    Log.e(TAG, "NEVER COMING" );
+                }
+            }
+        }
+
+        @Override
+        public void onError(int error) {
+            dismissCustomDialog();
+            if (error != MLAsrConstants.ERR_SERVICE_UNAVAILABLE) {
+                showFailedDialog(getPrompt(error));
+            }
+        }
+
+        @Override
+        public void onFinish() {            dismissCustomDialog();        }
+    }
+
+
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.button_start) {
             oASRManager = new ASRManager(this, oASRCallBack);    //1第一次RecognizerSV
-
             animationRecording = (AnimationDrawable) imageViewRecording.getDrawable();
             animationRecording.start();
             textViewRecording.setText(getString(R.string.tv_click_to_stop));
@@ -124,40 +157,6 @@ public class Chat_ListView extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onResume() {
         super.onResume();
-    }
-
-    private class ASRManagerCallBack implements ASRManager.CallBackInterface {
-        @Override
-        public void onResults(ArrayList<String> results, Boolean partial) {
-            if (results != null && results.size() > 0) {
-                if (results.size() == 1) {
-                    aMsg = new AMessage(results.get(0), pUserId, pUserName, pUserAvaR, true);
-                    if (!ASRManager.howToLine.equals("onStartingOfSpeech")){
-                        Log.e(TAG, "partial1: " + partial + " howToLine: " + ASRManager.howToLine);
-                        aList.add(aMsg);
-                    }else{
-                        Log.e(TAG, "partial2: " + partial + " howToLine: " + ASRManager.howToLine);
-                        aList.set(aList.size() - 1, aMsg);
-                    }
-                    aAdapter.notifyDataSetChanged();             // refresh ListView when new messages coming
-                    listView.setSelection(aList.size());   // go to the end of the ListView
-                    Log.e(TAG, "line 269, onresults" );
-                } else {
-                    Log.e(TAG, "NEVER COMING" );
-                }
-            }
-        }
-
-        @Override
-        public void onError(int error) {
-            dismissCustomDialog();
-            if (error != MLAsrConstants.ERR_SERVICE_UNAVAILABLE) {
-                showFailedDialog(getPrompt(error));
-            }
-        }
-
-        @Override
-        public void onFinish() {            dismissCustomDialog();        }
     }
 
     private void dismissCustomDialog() {

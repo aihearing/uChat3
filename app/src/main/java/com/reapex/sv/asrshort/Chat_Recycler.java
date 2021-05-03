@@ -134,7 +134,7 @@ public class Chat_Recycler extends BaseActivity implements View.OnClickListener 
 
     private class ClassOnResultInterface implements ASRManager.CallBackInterface {
         @Override
-        public void onResults(ArrayList<String> results, Boolean partial) {
+        public void onResults(ArrayList<String> results) {
             if (results != null && results.size() > 0) {
                 if (results.size() == 1) {
                     aMsg = new AMessage(results.get(0), pUserId, pUserName, pUserAvaR, true);

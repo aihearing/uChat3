@@ -48,7 +48,8 @@ public class ASRManager {
             if (partialResults != null) {
                 pResultsList.clear();
                 pResultsList.add(partialResults.getString(MLAsrRecognizer.RESULTS_RECOGNIZING));
-                iCallBackInterface.onResults(pResultsList, true);      //4 接口变量调用被实现的接口方法；
+                iCallBackInterface.onResults(pResultsList);      //4 接口变量调用被实现的接口方法；
+                howToLine="Partial";
                 Log.e(TAG, "onRecognizingResults 53 " + partialResults);    //Bundle[{results_recognizing=一颗}]
             }
         }
@@ -109,7 +110,7 @@ public class ASRManager {
         @Override
         public void onStartingOfSpeech() {
             howToLine = "onStartingOfSpeech";
-            Log.e(TAG, "5 用户开始讲话，即语音识别器检测到用户开始讲话。 onStartingOfSpeech--"+ "   #");
+            Log.e(TAG, "5 用户开始讲话，即语音识别器检测到用户开始讲话。 onStartingOfSpeech--"+ howToLine);
         }
     }
 
@@ -123,7 +124,7 @@ public class ASRManager {
 
     public interface CallBackInterface {
         //1 定义接口和接口中的方法
-        void onResults(ArrayList<String> results, Boolean partial);
+        void onResults(ArrayList<String> results);
         void onFinish();
         void onError(int error);
     }
