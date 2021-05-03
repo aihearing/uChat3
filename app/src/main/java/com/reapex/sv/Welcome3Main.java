@@ -1,28 +1,23 @@
 package com.reapex.sv;
 
 import android.content.ContentResolver;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.reapex.sv.asrlong.ChatVIP;
+import com.reapex.sv.asrshort.ChatRecyclerView;
 import com.reapex.sv.db.AChatDB;
 import com.reapex.sv.frag3me.Frag3Me;
 
@@ -110,7 +105,7 @@ public class Welcome3Main extends BaseActivity {
     }
 
     public void onTabClicked(View view) {
-        if (view.getId() == R.id.rl_chat){
+        if (view.getId() == R.id.rl_home){
             mIndex = 0;
 //            StatusBarUtil.setStatusBarColor(MainActivity.this, R.color.wechat_common_bg);
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.wechat_common_bg));
@@ -121,10 +116,12 @@ public class Welcome3Main extends BaseActivity {
         }else if(view.getId() == R.id.rl_scenario){
             mIndex = 1;
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.wechat_common_bg));
-        }else if(view.getId() == R.id.rl_discover){
-//            Intent intent = new Intent(this , ChatVIP.class);
-//            this.startActivity(intent);
 
+        }else if(view.getId() == R.id.rl_vip){
+//            Intent intent = new Intent(this , ChatVIP.class);
+            Intent intent = new Intent(this , ChatRecyclerView.class);
+            this.startActivity(intent);
+/*
             EditText editText = new EditText(this);
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setTitle(getString(R.string.input_code));
@@ -145,7 +142,7 @@ public class Welcome3Main extends BaseActivity {
                 public void onClick(DialogInterface dialog, int which) {}
             });
             dialog.show();
-
+*/
         }else if(view.getId() == R.id.rl_me){
             mIndex = 2;
 //           StatusBarUtil.setStatusBarColor(MainActivity.this, R.color.bottom_text_color_normal);

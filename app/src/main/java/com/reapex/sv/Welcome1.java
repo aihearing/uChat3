@@ -40,7 +40,7 @@ public class Welcome1 extends BaseActivity implements CallBack {
         super.onCreate(savedInstanceState);
         setApiKey();        // huawei
 
-        MySP.getInstance().init(this);
+//        MySP.getInstance().init(this);
         if(!MySP.getInstance().getWelcome().equals("")){
             Intent intent = new Intent(this, Welcome2Earth.class);
             startActivity(intent);

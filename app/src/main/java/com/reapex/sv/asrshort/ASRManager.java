@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import static com.reapex.sv.Constant.NUM_OF_6_SECONDS;
 
 //SpeechRecognizerManager
-public class ShortASRManager {
+public class ASRManager {
     final String TAG = this.getClass().getSimpleName();
 
     public static String howToLine;
@@ -22,11 +22,11 @@ public class ShortASRManager {
     ListenerSV mListenerSV;
 
     protected Context mContext;
-    protected MLAsrRecognizer mRecognizer;
+    public MLAsrRecognizer oRecognizer;
 
     private OnResultsReadyInterface mInterface;  //2 接口变量
 
-    public ShortASRManager(Context pContext, OnResultsReadyInterface pInterface) {
+    public ASRManager(Context pContext, OnResultsReadyInterface pInterface) {
         try {
             mInterface = pInterface;        //3 提供注册接口的方法 暴露接口给调用者；
         } catch (ClassCastException e) {
@@ -38,19 +38,21 @@ public class ShortASRManager {
         initReco();
     }
 
-    protected void initReco(){
-        mRecognizer = MLAsrRecognizer.createAsrRecognizer(mContext);    //a 用户调用接口创建一个语音识别器。
-        mRecognizer.setAsrListener(mListenerSV);                        //b 绑定个listener
+    public void initReco(){
+
+        destroy();
+        oRecognizer = MLAsrRecognizer.createAsrRecognizer(mContext);    //a 用户调用接口创建一个语音识别器。
+        oRecognizer.setAsrListener(mListenerSV);                        //b 绑定个listener
 
         Intent intent = new Intent(MLAsrConstants.ACTION_HMS_ASR_SPEECH);
         intent.putExtra(MLAsrConstants.LANGUAGE, "zh-CN")
-              .putExtra(MLAsrConstants.FEATURE, MLAsrConstants.FEATURE_WORDFLUX);
-        mRecognizer.startRecognizing(intent);
+                .putExtra(MLAsrConstants.FEATURE, MLAsrConstants.FEATURE_WORDFLUX);
+        oRecognizer.startRecognizing(intent);
     }
 
     protected class ListenerSV implements MLAsrListener {ArrayList<String> pResultsList = new ArrayList<>();
         // 从MLAsrRecognizer接收到持续语音识别的文本，该接口并非运行在主线程中，返回结果需要在子线程中处理。
-        //Bundle中携带了识别后的文本信息，文本信息以String类型保存在以MLAsrRecognizer.RESULTS_RECOGNIZING为key的value中。
+        // Bundle中携带了识别后的文本信息，文本信息以String类型保存在以MLAsrRecognizer.RESULTS_RECOGNIZING为key的value中。
         @Override
         public void onRecognizingResults(Bundle partialResults) {
             if (partialResults != null) {
@@ -74,7 +76,7 @@ public class ShortASRManager {
                 }else{
                     mInterface.onOneMinute();
                 }
-                Log.e(TAG, "initReco " + "total6s: " + total6s);
+                Log.e(TAG, "initReco total6s: " + total6s);
             }
         }
 
@@ -129,10 +131,10 @@ public class ShortASRManager {
     }
 
     public void destroy() {
-        Log.d(TAG, "onDestroy 109");
-        if (mRecognizer != null) {
-            mRecognizer.destroy();
-            mRecognizer = null;
+        Log.d(TAG, "onDestroy 134");
+        if (oRecognizer != null) {
+            oRecognizer.destroy();
+            oRecognizer = null;
         }
     }
 

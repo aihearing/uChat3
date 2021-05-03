@@ -18,6 +18,7 @@ import com.google.android.material.button.MaterialButton;
 import com.huawei.hms.mlsdk.speechrtt.MLSpeechRealTimeTranscription;
 import com.huawei.hms.mlsdk.speechrtt.MLSpeechRealTimeTranscriptionConstants;
 import com.reapex.sv.R;
+import com.reapex.sv.adapter.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 
@@ -39,7 +40,7 @@ public class ChatVIP extends AppCompatActivity {
     AnimationDrawable mAnimationMic;
     TextView mTextViewBottom;
     ImageView mImageViewBottom;
-    MyRecyclerViewAdapter mAdapter;
+    RecyclerViewAdapter mAdapter;
     RecyclerView mRecyclerView;
 
     @Override
@@ -61,7 +62,7 @@ public class ChatVIP extends AppCompatActivity {
 
         // 2. set up the RecyclerView
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new MyRecyclerViewAdapter(this, mArrayList);
+        mAdapter = new RecyclerViewAdapter(this, mArrayList);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -137,6 +138,7 @@ public class ChatVIP extends AppCompatActivity {
                         if (status == RTTManager.RESULT_FINAL) {
                             if (!TextUtils.isEmpty(recognizerResult.toString())) {
                                 //recognizerResult.append(",");
+                                Log.d(TAG, "dd");
                             }
                             recognizerResult.append(sb.toString());
                             // errorTv.setText(recognizerResult.toString());
@@ -150,7 +152,7 @@ public class ChatVIP extends AppCompatActivity {
                 String tip = getPrompt(error);
                 if (!TextUtils.isEmpty(tip)) {
                     Log.d(TAG, "onError: " + error + " Update page: " + tip);
-                    tip = "ERROR: " + tip;
+                    // tip = "ERROR: " + tip;
                     //errorTv.setVisibility(View.VISIBLE);
                     //errorTv.setText(tip);
                     //去掉 you may speak now

@@ -1,4 +1,4 @@
-package com.reapex.sv.asrlong;
+package com.reapex.sv.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,13 +12,13 @@ import com.reapex.sv.R;
 
 import java.util.List;
 
-public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder0> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder0> {
 
     private final List<String> mData;
     private final LayoutInflater mInflater;
 
     //1. 接下data，把view指向ChatVIP
-    MyRecyclerViewAdapter(Context context, List<String> data) {
+    public RecyclerViewAdapter(Context context, List<String> data) {
         this.mInflater = LayoutInflater.from(context);      //用chatVIP的view
         this.mData = data;                                  //用chatVIP的data
     }

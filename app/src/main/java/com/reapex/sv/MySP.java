@@ -16,10 +16,11 @@ import java.io.Serializable;
 
 public class MySP {
 
-    private SharedPreferences preferences = null;
-    private SharedPreferences.Editor editor = null;
+    private static  MySP    mySP;
+
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
     private Object object;
-    public static MySP mySP;
 
     public static MySP getInstance() {
         if (mySP == null) {
@@ -34,7 +35,7 @@ public class MySP {
     }
 
     public void init(Context context) {
-        preferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
     }
 
     /**
@@ -43,34 +44,32 @@ public class MySP {
      * 我们的这个Activity只要我们的项目活着，就没有办法进行内存回收。而我们的Activity的生命周期肯定没这么长，造成了内存泄漏。
      * 所以这里使用context.getApplicationContext()
      */
-    private MySP() {
-
-    }
+    private MySP() {    }
 
     /**
      * 保存数据 , 所有的类型都适用
      *
      */
     public synchronized void saveParam(String key, Object object) {
-        if (editor == null)
-            editor = preferences.edit();
+        if (mEditor == null)
+            mEditor = mSharedPreferences.edit();
         // 得到object的类型
         String type = object.getClass().getSimpleName();
         if ("String".equals(type)) {
             // 保存String 类型
-            editor.putString(key, (String) object);
+            mEditor.putString(key, (String) object);
         } else if ("Integer".equals(type)) {
             // 保存integer 类型
-            editor.putInt(key, (Integer) object);
+            mEditor.putInt(key, (Integer) object);
         } else if ("Boolean".equals(type)) {
             // 保存 boolean 类型
-            editor.putBoolean(key, (Boolean) object);
+            mEditor.putBoolean(key, (Boolean) object);
         } else if ("Float".equals(type)) {
             // 保存float类型
-            editor.putFloat(key, (Float) object);
+            mEditor.putFloat(key, (Float) object);
         } else if ("Long".equals(type)) {
             // 保存long类型
-            editor.putLong(key, (Long) object);
+            mEditor.putLong(key, (Long) object);
         } else {
             if (!(object instanceof Serializable)) {
                 throw new IllegalArgumentException(object.getClass().getName() + " 必须实现Serializable接口!");
@@ -83,24 +82,24 @@ public class MySP {
                 oos.writeObject(object);
                 String productBase64 = Base64.encodeToString(
                         baos.toByteArray(), Base64.DEFAULT);
-                editor.putString(key, productBase64);
+                mEditor.putString(key, productBase64);
                 Log.d(this.getClass().getSimpleName(), "save object success");
             } catch (IOException e) {
                 e.printStackTrace();
                 Log.e(this.getClass().getSimpleName(), "save object error");
             }
         }
-        editor.apply();
+        mEditor.apply();
     }
 
     /**
      * 移除信息
      */
     public synchronized void remove(String key) {
-        if (editor == null)
-            editor = preferences.edit();
-        editor.remove(key);
-        editor.apply();
+        if (mEditor == null)
+            mEditor = mSharedPreferences.edit();
+        mEditor.remove(key);
+        mEditor.apply();
     }
 
 
@@ -116,15 +115,15 @@ public class MySP {
         String type = defaultObject.getClass().getSimpleName();
 
         if ("String".equals(type)) {
-            return preferences.getString(key, (String) defaultObject);
+            return mSharedPreferences.getString(key, (String) defaultObject);
         } else if ("Integer".equals(type)) {
-            return preferences.getInt(key, (Integer) defaultObject);
+            return mSharedPreferences.getInt(key, (Integer) defaultObject);
         } else if ("Boolean".equals(type)) {
-            return preferences.getBoolean(key, (Boolean) defaultObject);
+            return mSharedPreferences.getBoolean(key, (Boolean) defaultObject);
         } else if ("Float".equals(type)) {
-            return preferences.getFloat(key, (Float) defaultObject);
+            return mSharedPreferences.getFloat(key, (Float) defaultObject);
         } else if ("Long".equals(type)) {
-            return preferences.getLong(key, (Long) defaultObject);
+            return mSharedPreferences.getLong(key, (Long) defaultObject);
         }
         return getObject(key);
     }
@@ -203,7 +202,7 @@ public class MySP {
     }
 
     public Object getObject(String key) {
-        String wordBase64 = preferences.getString(key, "");
+        String wordBase64 = mSharedPreferences.getString(key, "");
         byte[] base64 = Base64.decode(wordBase64.getBytes(), Base64.DEFAULT);
         ByteArrayInputStream bais = new ByteArrayInputStream(base64);
         try {

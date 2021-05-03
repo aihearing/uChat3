@@ -16,7 +16,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.reapex.sv.asrshort.ChatShort;
+import com.reapex.sv.asrshort.ChatListView;
 
 public class Frag0 extends Fragment  implements View.OnClickListener {
     static final String TAG = Frag0.class.getSimpleName();
@@ -78,11 +78,6 @@ public class Frag0 extends Fragment  implements View.OnClickListener {
         }
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
     /**
      * Called when the fragment is visible to the user and actively running.
      * This is generally
@@ -119,7 +114,7 @@ public class Frag0 extends Fragment  implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(getActivity(), ChatShort.class);
+        Intent intent = new Intent(getActivity(), ChatListView.class);
         intent.putExtra("from1", getString(R.string.code1));
         intent.putExtra("from2", getString(R.string.contact1));
         intent.putExtra("from3", R.mipmap.icons81);

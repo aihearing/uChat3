@@ -1,4 +1,4 @@
-package com.reapex.sv.asrshort;
+package com.reapex.sv.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -19,7 +19,7 @@ import com.reapex.sv.utils.TimestampUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyListViewAdapter extends BaseAdapter {
+public class ListViewAdapter extends BaseAdapter {
     private static final int MESSAGE_TYPE_SENT_TEXT = 0;
     private static final int MESSAGE_TYPE_RECV_TEXT = 1;
 
@@ -27,9 +27,9 @@ public class MyListViewAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     Boolean isSender;
 
-    List<AMessage> aMessageList = new ArrayList<AMessage>();
+    List<AMessage> aMessageList;
 
-    public MyListViewAdapter(Context context, List<AMessage> messageList) {
+    public ListViewAdapter(Context context, List<AMessage> messageList) {
         mContext = context;
         inflater = LayoutInflater.from(context);
         MySP.getInstance().init(context);
