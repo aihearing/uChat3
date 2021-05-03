@@ -17,7 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.reapex.sv.asrshort.ChatRecycler;
+import com.reapex.sv.asrshort.Chat_Recycler;
 
 public class Frag1 extends Fragment implements View.OnClickListener {
     final String TAG = this.getClass().getSimpleName();
@@ -58,25 +58,25 @@ public class Frag1 extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.relative_general) {
-            Intent intent = new Intent(getActivity(), ChatRecycler.class);
+            Intent intent = new Intent(getActivity(), Chat_Recycler.class);
             intent.putExtra("from1", getString(R.string.code1));
             intent.putExtra("from2", getString(R.string.contact1));
             intent.putExtra("from3", R.mipmap.icons81);
             startActivity(intent);
         } else if (view.getId() == R.id.relative_in_house) {
-            Intent intent = new Intent(getActivity(), ChatRecycler.class);
+            Intent intent = new Intent(getActivity(), Chat_Recycler.class);
             intent.putExtra("from1", getString(R.string.code2));
             intent.putExtra("from2", getString(R.string.contact2));
             intent.putExtra("from3", R.mipmap.icons82);
             startActivity(intent);
         } else if (view.getId() == R.id.relative_outside) {
-            Intent intent = new Intent(getActivity(), ChatRecycler.class);
+            Intent intent = new Intent(getActivity(), Chat_Recycler.class);
             intent.putExtra("from1", getString(R.string.code3));
             intent.putExtra("from2", getString(R.string.contact3));
             intent.putExtra("from3", R.mipmap.icons83);
             startActivity(intent);
         } else if (view.getId() == R.id.relative_noise) {
-            Intent intent = new Intent(getActivity(), ChatRecycler.class);
+            Intent intent = new Intent(getActivity(), Chat_Recycler.class);
             intent.putExtra("from1", getString(R.string.code4));
             intent.putExtra("from2", getString(R.string.contact4));
             intent.putExtra("from3", R.mipmap.icons84);

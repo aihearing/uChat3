@@ -28,14 +28,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.reapex.sv.asrshort.ShortASRManager.total6s;
-
-public class ChatRecycler extends BaseActivity implements View.OnClickListener {
+public class Chat_Recycler extends BaseActivity implements View.OnClickListener {
     final String TAG = this.getClass().getSimpleName();
     static final int REQUEST_CODE_VOICE = 5;
 
     private final ClassOnResultInterface oFromInterface = new ClassOnResultInterface();
-    ShortASRManager oASRManagerRecording;         //huawei
+    ASRManager oASRManagerRecording;         //huawei
 
     TextView textViewRecording;
     ImageView imageViewRecording;
@@ -72,14 +70,14 @@ public class ChatRecycler extends BaseActivity implements View.OnClickListener {
 
         AMessage msg1 = new AMessage("大家说，我听，您看。", "800", "你说", R.mipmap.default_user_avatar, false);
         aList   = new ArrayList<>(Arrays.asList(msg1));
-        aAdapter= new MyListViewAdapter(ChatRecycler.this, aList);
+        aAdapter= new MyListViewAdapter(Chat_Recycler.this, aList);
         listView.setAdapter(aAdapter);
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.button_start) {
-            oASRManagerRecording = new ShortASRManager(this, oFromInterface);    //1第一次RecognizerSV
+            oASRManagerRecording = new ASRManager(this, oFromInterface);    //1第一次RecognizerSV
 
             animationRecording = (AnimationDrawable) imageViewRecording.getDrawable();
             animationRecording.start();
@@ -134,20 +132,20 @@ public class ChatRecycler extends BaseActivity implements View.OnClickListener {
         super.onResume();
     }
 
-    private class ClassOnResultInterface implements ShortASRManager.OnResultsReadyInterface {
+    private class ClassOnResultInterface implements ASRManager.CallBackInterface {
         @Override
         public void onResults(ArrayList<String> results, Boolean partial) {
             if (results != null && results.size() > 0) {
                 if (results.size() == 1) {
                     aMsg = new AMessage(results.get(0), pUserId, pUserName, pUserAvaR, true);
-                    if (ShortASRManager.howToLine.equals("onStartingOfSpeech")){
+                    if (ASRManager.howToLine.equals("onStartingOfSpeech")){
                         aList.add(aMsg);
                     }else{
                         aList.set(aList.size() - 1, aMsg);
                     }
                     aAdapter.notifyDataSetChanged();             // refresh ListView when new messages coming
                     listView.setSelection(aList.size());   // go to the end of the ListView
-                    Log.e(TAG, "line 269, onresults" + total6s);
+                    Log.e(TAG, "line 269, onresults"  );
                 } else {
                     Log.e(TAG, "NEVER COMING" );
                 }
@@ -165,11 +163,6 @@ public class ChatRecycler extends BaseActivity implements View.OnClickListener {
         @Override
         public void onFinish() {            dismissCustomDialog();        }
 
-        @Override
-        public void onOneMinute() {
-            Log.e(TAG, "onOneMinute: #" + total6s);
-            stopASR("onOneMinute");
-        }
     }
 
     private void dismissCustomDialog() {
@@ -180,7 +173,7 @@ public class ChatRecycler extends BaseActivity implements View.OnClickListener {
     }
 
     private void showFailedDialog(int res) {
-        AlertDialog dialog = new AlertDialog.Builder(ChatRecycler.this)
+        AlertDialog dialog = new AlertDialog.Builder(Chat_Recycler.this)
                 .setMessage(res)
                 .setPositiveButton(getString(R.string.str_ok), new DialogInterface.OnClickListener() {
                     @Override

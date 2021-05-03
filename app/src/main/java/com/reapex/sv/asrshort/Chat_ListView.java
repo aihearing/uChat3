@@ -24,14 +24,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.reapex.sv.asrshort.ShortASRManager.total6s;
-
 public class Chat_ListView extends BaseActivity implements View.OnClickListener {
     final String TAG = this.getClass().getSimpleName();
-    static final int REQUEST_CODE_VOICE = 5;
 
-    private final ClassOnResultInterface oFromInterface = new ClassOnResultInterface();
-    ShortASRManager oASRManagerRecording;         //huawei
+    protected     ASRManager         oASRManager;                               //huawei
+    private final ASRManagerCallBack oASRCallBack = new ASRManagerCallBack();
 
     TextView textViewRecording;
     ImageView imageViewRecording;
@@ -75,17 +72,16 @@ public class Chat_ListView extends BaseActivity implements View.OnClickListener 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.button_start) {
-            oASRManagerRecording = new ShortASRManager(this, oFromInterface);    //1第一次RecognizerSV
+            oASRManager = new ASRManager(this, oASRCallBack);    //1第一次RecognizerSV
 
             animationRecording = (AnimationDrawable) imageViewRecording.getDrawable();
             animationRecording.start();
-
             textViewRecording.setText(getString(R.string.tv_click_to_stop));
-
             mBtnStop.setVisibility(View.VISIBLE);
             mBtnStart.setVisibility(View.INVISIBLE);
         }else if (view.getId() == R.id.button_stop) {
             stopASR("button_stop");
+
             if (animationRecording != null && animationRecording.isRunning()) {animationRecording.stop();}
             textViewRecording.setText(getString(R.string.asr_start_recording));
             mBtnStop.setVisibility(View.INVISIBLE);
@@ -102,9 +98,9 @@ public class Chat_ListView extends BaseActivity implements View.OnClickListener 
     }
 
     void stopASR(String src){
-        if (oASRManagerRecording != null) {
-            oASRManagerRecording.destroy();
-            oASRManagerRecording = null;
+        if (oASRManager != null) {
+            oASRManager.destroy();
+            oASRManager = null;
         }
         if (animationRecording != null && animationRecording.isRunning()) {animationRecording.stop();}
         mBtnStop.setVisibility(View.INVISIBLE);
@@ -130,20 +126,22 @@ public class Chat_ListView extends BaseActivity implements View.OnClickListener 
         super.onResume();
     }
 
-    private class ClassOnResultInterface implements ShortASRManager.OnResultsReadyInterface {
+    private class ASRManagerCallBack implements ASRManager.CallBackInterface {
         @Override
         public void onResults(ArrayList<String> results, Boolean partial) {
             if (results != null && results.size() > 0) {
                 if (results.size() == 1) {
                     aMsg = new AMessage(results.get(0), pUserId, pUserName, pUserAvaR, true);
-                    if (ShortASRManager.howToLine.equals("onStartingOfSpeech")){
+                    if (!ASRManager.howToLine.equals("onStartingOfSpeech")){
+                        Log.e(TAG, "partial1: " + partial + " howToLine: " + ASRManager.howToLine);
                         aList.add(aMsg);
                     }else{
+                        Log.e(TAG, "partial2: " + partial + " howToLine: " + ASRManager.howToLine);
                         aList.set(aList.size() - 1, aMsg);
                     }
                     aAdapter.notifyDataSetChanged();             // refresh ListView when new messages coming
                     listView.setSelection(aList.size());   // go to the end of the ListView
-                    Log.e(TAG, "line 269, onresults" + total6s);
+                    Log.e(TAG, "line 269, onresults" );
                 } else {
                     Log.e(TAG, "NEVER COMING" );
                 }
@@ -160,12 +158,6 @@ public class Chat_ListView extends BaseActivity implements View.OnClickListener 
 
         @Override
         public void onFinish() {            dismissCustomDialog();        }
-
-        @Override
-        public void onOneMinute() {
-            Log.e(TAG, "onOneMinute: #" + total6s);
-            stopASR("onOneMinute");
-        }
     }
 
     private void dismissCustomDialog() {
