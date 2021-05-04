@@ -2,13 +2,8 @@ package com.reapex.sv.asrshort;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -16,10 +11,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
 import com.google.android.material.button.MaterialButton;
-
 import com.huawei.hms.mlsdk.asr.MLAsrConstants;
-
 import com.reapex.sv.BaseActivity;
 import com.reapex.sv.R;
 import com.reapex.sv.db.AMessage;
@@ -28,12 +24,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Chat_Recycler extends BaseActivity implements View.OnClickListener {
+public class Chat_ListView_Original extends BaseActivity implements View.OnClickListener {
     final String TAG = this.getClass().getSimpleName();
-    static final int REQUEST_CODE_VOICE = 5;
 
-    private final ClassOnResultInterface oFromInterface = new ClassOnResultInterface();
-    ASRManager oASRManagerRecording;         //huawei
+    protected     ASRManager         oASRManager;
+    private final ASRManagerCallBack oASRCallBack = new ASRManagerCallBack();
 
     TextView textViewRecording;
     ImageView imageViewRecording;
@@ -70,24 +65,57 @@ public class Chat_Recycler extends BaseActivity implements View.OnClickListener 
 
         AMessage msg1 = new AMessage("大家说，我听，您看。", "800", "你说", R.mipmap.default_user_avatar, false);
         aList   = new ArrayList<>(Arrays.asList(msg1));
-        aAdapter= new MyListViewAdapter(Chat_Recycler.this, aList);
+        aAdapter= new MyListViewAdapter(Chat_ListView_Original.this, aList);
         listView.setAdapter(aAdapter);
     }
+
+    private class ASRManagerCallBack implements ASRManager.CallBackInterface {
+        @Override
+        public void onResults(ArrayList<String> results) {
+            if (results != null && results.size() > 0) {
+                if (results.size() == 1) {
+                    aMsg = new AMessage(results.get(0), pUserId, pUserName, pUserAvaR, true);
+                    if (ASRManager.howToLine.equals("onStartingOfSpeech")){ //Log.e(TAG, "howToLine: " + ASRManager.howToLine + " means 第一句话");
+                        aList.add(aMsg);
+                    }else{  //                        Log.e(TAG, "partial2: "  + " howToLine: " + ASRManager.howToLine);
+                        aList.set(aList.size() - 1, aMsg);
+                    }
+                    aAdapter.notifyDataSetChanged();           // refresh ListView when new messages coming
+                    listView.setSelection(aList.size());       // go to the end of the ListView
+                } else {                          Log.e(TAG, "NEVER COMING" );                }
+            }
+        }
+
+        @Override
+        public void onError(int error) {
+            dismissCustomDialog();
+            if (error != MLAsrConstants.ERR_SERVICE_UNAVAILABLE) {
+                showFailedDialog(getPrompt(error));
+            }
+        }
+
+        @Override
+        public void onFinish() {
+            dismissCustomDialog();
+            Log.e(TAG, "---------------88 on finishing");
+//            stopASR("on6s");
+//            oASRManager = new ASRManager(Chat_ListView_Original.this, oASRCallBack);    //1第一次RecognizerSV
+        }
+    }
+
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.button_start) {
-//            oASRManagerRecording = new ASRManager(this, oFromInterface);    //1第一次RecognizerSV
-
+//            oASRManager = new ASRManager(this, oASRCallBack);    //1第一次RecognizerSV
             animationRecording = (AnimationDrawable) imageViewRecording.getDrawable();
             animationRecording.start();
-
             textViewRecording.setText(getString(R.string.tv_click_to_stop));
-
             mBtnStop.setVisibility(View.VISIBLE);
             mBtnStart.setVisibility(View.INVISIBLE);
         }else if (view.getId() == R.id.button_stop) {
             stopASR("button_stop");
+
             if (animationRecording != null && animationRecording.isRunning()) {animationRecording.stop();}
             textViewRecording.setText(getString(R.string.asr_start_recording));
             mBtnStop.setVisibility(View.INVISIBLE);
@@ -104,19 +132,22 @@ public class Chat_Recycler extends BaseActivity implements View.OnClickListener 
     }
 
     void stopASR(String src){
-        if (oASRManagerRecording != null) {
-            oASRManagerRecording.destroy();
-            oASRManagerRecording = null;
+        if (oASRManager != null) {
+            oASRManager.destroy();
+            oASRManager = null;
         }
-        if (animationRecording != null && animationRecording.isRunning()) {animationRecording.stop();}
-        mBtnStop.setVisibility(View.INVISIBLE);
-        mBtnStart.setVisibility(View.VISIBLE);
 
         if (src.equals("onPause")) {
+            if (animationRecording != null && animationRecording.isRunning()) {animationRecording.stop();}
+            mBtnStop.setVisibility(View.INVISIBLE);
+            mBtnStart.setVisibility(View.VISIBLE);
             textViewRecording.setText(getString(R.string.asr_back));
         }else if (src.equals("button_stop")) {
+            if (animationRecording != null && animationRecording.isRunning()) {animationRecording.stop();}
+            mBtnStop.setVisibility(View.INVISIBLE);
+            mBtnStart.setVisibility(View.VISIBLE);
             textViewRecording.setText(getString(R.string.asr_start_recording));
-        }else if (src.equals("onOneMinute")) {
+        }else if (src.equals("on6s")) {
             textViewRecording.setText(getString(R.string.asr_sleeping));
         }
     }
@@ -132,39 +163,6 @@ public class Chat_Recycler extends BaseActivity implements View.OnClickListener 
         super.onResume();
     }
 
-    private class ClassOnResultInterface implements ASRManager.CallBackInterface {
-        @Override
-        public void onResults(ArrayList<String> results) {
-            if (results != null && results.size() > 0) {
-                if (results.size() == 1) {
-                    aMsg = new AMessage(results.get(0), pUserId, pUserName, pUserAvaR, true);
-                    if (ASRManager.howToLine.equals("onStartingOfSpeech")){
-                        aList.add(aMsg);
-                    }else{
-                        aList.set(aList.size() - 1, aMsg);
-                    }
-                    aAdapter.notifyDataSetChanged();             // refresh ListView when new messages coming
-                    listView.setSelection(aList.size());   // go to the end of the ListView
-                    Log.e(TAG, "line 269, onresults"  );
-                } else {
-                    Log.e(TAG, "NEVER COMING" );
-                }
-            }
-        }
-
-        @Override
-        public void onError(int error) {
-            dismissCustomDialog();
-            if (error != MLAsrConstants.ERR_SERVICE_UNAVAILABLE) {
-                showFailedDialog(getPrompt(error));
-            }
-        }
-
-        @Override
-        public void onFinish() {            dismissCustomDialog();        }
-
-    }
-
     private void dismissCustomDialog() {
         runOnUiThread(new Runnable() {
             @Override
@@ -173,7 +171,7 @@ public class Chat_Recycler extends BaseActivity implements View.OnClickListener 
     }
 
     private void showFailedDialog(int res) {
-        AlertDialog dialog = new AlertDialog.Builder(Chat_Recycler.this)
+        AlertDialog dialog = new AlertDialog.Builder(Chat_ListView_Original.this)
                 .setMessage(res)
                 .setPositiveButton(getString(R.string.str_ok), new DialogInterface.OnClickListener() {
                     @Override

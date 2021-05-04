@@ -168,7 +168,7 @@ public class ChatVIP extends AppCompatActivity {
         String error_text;
         switch (errorCode) {
             case MLSpeechRealTimeTranscriptionConstants.ERR_NO_NETWORK:
-                error_text = getString(R.string.no_intnet);
+                error_text = getString(R.string.no_internet);
                 break;
             case MLSpeechRealTimeTranscriptionConstants.ERR_SERVICE_UNAVAILABLE:
                 error_text = getString(R.string.no_service);

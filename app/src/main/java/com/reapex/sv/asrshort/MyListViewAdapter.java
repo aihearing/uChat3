@@ -32,7 +32,6 @@ public class MyListViewAdapter extends BaseAdapter {
     public MyListViewAdapter(Context context, List<AMessage> messageList) {
         mContext = context;
         inflater = LayoutInflater.from(context);
-        MySP.getInstance().init(context);
         this.aMessageList = messageList;
     }
 
@@ -121,7 +120,7 @@ public class MyListViewAdapter extends BaseAdapter {
 
         if (position > 1) {
             AMessage aLastMessage = aMessageList.get(position - 1);
-            if (message.getTimestamp() - aLastMessage.getTimestamp() < 1 * 60 * 1000) {
+            if (message.getTimestamp() - aLastMessage.getTimestamp() < 2 * 60 * 1000) {
                 viewHolder.mTimeStampTv.setVisibility(View.GONE);
             }
         }

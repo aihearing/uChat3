@@ -6,7 +6,7 @@ package com.reapex.sv;
 public class Constant {
     public static String PICTURE_DIR = "sdcard/wechat_/pictures/";
     public static final String BASE_URL = "/";
-
+    // long currentTime = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis());
 //    public static final String URL = "https://seeingvoice.com";      //中文
     public static final String URL = "https://seeingvoice.gitee.io";      //中文
     public static final String URL_UPGRADE         = URL+"/youchat/";        //关于我们
@@ -15,7 +15,13 @@ public class Constant {
     public static final String URL_PRIVACY          = URL+"/privacy/";      //隐私政策
     public static final String URL_USER_AGREEMENT   = URL+"/terms/";        //用户协议
 
-    public static final int NUM_OF_6_SECONDS = 10;
+    //通知应用状态发生改变，该接口并非运行在主线程中，返回结果需要在子线程中处理。
+    //STATE_LISTENING        //onState回调中的状态码，表示录音机已经准备好。      //Constant Value：1
+    //STATE_NO_NETWORK        //onState回调中的状态码，表示当前环境没有网络。      //Constant Value：7
+    //STATE_NO_SOUND        //onState回调中的状态码，表示3s内没有检测到没有说话。  //Constant Value：2
+    //STATE_NO_SOUND_TIMES_EXCEED //onState回调中的状态码，表示6s内没有检测到结果。//Constant Value：3
+    //STATE_NO_UNDERSTAND        //onState回调中的状态码，表示当前帧云端检测失败。 //Constant Value：6
+    //STATE_WAITING //onState回调中的状态码，表示第一次发送数据时在弱网情况下。     //Constant Value：9
 
     public static final String IS_NOT_FRIEND = "0";
     public static final String IS_FRIEND = "1";
