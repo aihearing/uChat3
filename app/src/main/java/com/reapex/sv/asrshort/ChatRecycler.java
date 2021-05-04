@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Chat_Recycler extends BaseActivity implements View.OnClickListener {
+public class ChatRecycler extends BaseActivity implements View.OnClickListener {
     final String TAG = this.getClass().getSimpleName();
     static final int REQUEST_CODE_VOICE = 5;
 
@@ -70,7 +70,7 @@ public class Chat_Recycler extends BaseActivity implements View.OnClickListener 
 
         AMessage msg1 = new AMessage("大家说，我听，您看。", "800", "你说", R.mipmap.default_user_avatar, false);
         aList   = new ArrayList<>(Arrays.asList(msg1));
-        aAdapter= new MyListViewAdapter(Chat_Recycler.this, aList);
+        aAdapter= new MyListViewAdapter(ChatRecycler.this, aList);
         listView.setAdapter(aAdapter);
     }
 
@@ -173,7 +173,7 @@ public class Chat_Recycler extends BaseActivity implements View.OnClickListener 
     }
 
     private void showFailedDialog(int res) {
-        AlertDialog dialog = new AlertDialog.Builder(Chat_Recycler.this)
+        AlertDialog dialog = new AlertDialog.Builder(ChatRecycler.this)
                 .setMessage(res)
                 .setPositiveButton(getString(R.string.str_ok), new DialogInterface.OnClickListener() {
                     @Override

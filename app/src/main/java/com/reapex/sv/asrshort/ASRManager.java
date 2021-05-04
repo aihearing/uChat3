@@ -18,7 +18,7 @@ public class ASRManager {
     public static String howToLine;
 
     protected Context           mContext;
-protected CallBackInterface iCallBackInterface;  //2 接口变量
+    protected CallBackInterface iCallBackInterface;  //2 接口变量
 
 
     public void destroy() {
@@ -31,4 +31,5 @@ protected CallBackInterface iCallBackInterface;  //2 接口变量
         void onFinish();
         void onError(int error);
     }
+
 }

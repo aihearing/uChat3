@@ -64,13 +64,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/ImageTranslucentTheme" />
         <activity
-            android:name=".asrshort.Chat_ListView"
+            android:name=".asrshort.ChatListView"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/ChatActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".asrshort.Chat_Recycler"
+            android:name=".asrshort.ChatRecycler"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/ChatActivity"

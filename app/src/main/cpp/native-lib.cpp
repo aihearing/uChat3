@@ -8,7 +8,7 @@
 
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_com_reapex_sv_asrshort_ShortASRManager_webRtcVad_1Process(JNIEnv *env, jobject instance,
+Java_com_reapex_sv_asrshort_ChatListView_webRtcVad_1Process(JNIEnv *env, jobject instance,
                                                                  jshortArray audioData_,
                                                                  jint offsetInshort,
                                                                  jint readSize) {

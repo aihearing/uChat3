@@ -2,6 +2,9 @@ package com.reapex.sv.asrshort;
 
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
+import android.media.AudioFormat;
+import android.media.AudioRecord;
+import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,19 +26,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Chat_ListView extends BaseActivity{
+public class ChatListView extends BaseActivity{
     static ASRListener     asrListener;        // = new ASRListener();
     static MLAsrRecognizer asrRecognizer;    // = MLAsrRecognizer.createAsrRecognizer();    //a 用户调用接口创建一个语音识别器。
+    static AudioRecord mRecorder;
 
-    static String pUserId, pUserName;
-    static int    pUserAvaR;
+    static {System.loadLibrary("native-lib");}
+    boolean mStartVAD, mSpeaking, firstWord = true;
+
+
+    static  String   pUserId, pUserName;
+    static  int      pUserAvaR, mMinBufferSize;
 
     List<AMessage>    aList; // = new ArrayList<AMessage>();
     ListView          aListView;
     MyListViewAdapter aAdapter;
     Intent            mIntent;
-
-    boolean first = true;
 
     ImageView imageViewRecording;
     AnimationDrawable animationRecording;
@@ -53,7 +59,7 @@ public class Chat_ListView extends BaseActivity{
         aListView           = findViewById(R.id.list_view_message);
 
         aList    = new ArrayList<>(Arrays.asList(new AMessage("大家说，我听，您看。", "800", "你说", R.mipmap.default_user_avatar, false)));
-        aAdapter = new MyListViewAdapter(Chat_ListView.this, aList);
+        aAdapter = new MyListViewAdapter(ChatListView.this, aList);
         aListView.setAdapter(aAdapter);
 
         asrListener  = new ASRListener();
@@ -90,9 +96,9 @@ public class Chat_ListView extends BaseActivity{
                 listResults.add(bundleResults.getString(MLAsrRecognizer.RESULTS_RECOGNIZING));
                 if (listResults != null && listResults.size() > 0) {
                     AMessage aMsg = new AMessage(listResults.get(0), pUserId, pUserName, pUserAvaR, true);
-                    if (first) {
+                    if (firstWord) {
                         aList.add(aMsg);
-                        first = false;
+                        firstWord = false;
                     }else {
                         aList.set(aList.size() - 1, aMsg);
                     }
@@ -105,22 +111,64 @@ public class Chat_ListView extends BaseActivity{
 
         @Override // 收尾。语音识别的文本数据，该接口并非运行在主线程中，返回结果需要在子线程中处理。
         public void onResults(Bundle results) {
+            firstWord = true;       //本局结束。另起一行。
+            if (mRecorder==null) {
+                mMinBufferSize = AudioRecord.getMinBufferSize(16000, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
+                mRecorder = new AudioRecord(MediaRecorder.AudioSource.MIC, 16000, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, mMinBufferSize * 2);
+            }
+
+            mStartVAD = true;    //开始检测声音
+            int readSize;
+            mMinBufferSize = 320;
+            short[] audioData = new short[mMinBufferSize];
+
+            if (mRecorder.getState() != AudioRecord.STATE_INITIALIZED) {
+                mRecorder.stop();
+                return;
+            }
+            mRecorder.startRecording();
+
+            while (mStartVAD) {
+                if (null != mRecorder) {
+                    readSize = mRecorder.read(audioData, 0, mMinBufferSize);
+
+                    if (readSize == AudioRecord.ERROR_INVALID_OPERATION || readSize == AudioRecord.ERROR_BAD_VALUE) {
+                        continue;
+                    }
+                    if (readSize != 0 && readSize != -1) {
+                        // 语音活动检测
+                        mSpeaking = webRtcVad_Process(audioData, 0, readSize);
+                        if (mSpeaking) {
+                            Log.d("TAG", ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>正在讲话");
 
 
-            first = true;
+                        } else {
+                            Log.d("TAG", "=====当前无声音");
+                        }
+                    } else {
+                        break;
+                    }
+                }
+            }
+
             if (asrRecognizer!=null) {
                 asrRecognizer.destroy();
                 asrRecognizer=null;
-                asrRecognizer= MLAsrRecognizer.createAsrRecognizer(Chat_ListView.this);    //a 用户调用接口创建一个语音识别器。
+                asrRecognizer= MLAsrRecognizer.createAsrRecognizer(ChatListView.this);    //a 用户调用接口创建一个语音识别器。
                 asrRecognizer.setAsrListener(asrListener);                        //b 绑定个listener
             }
             asrRecognizer.startRecognizing(mIntent);
             Log.e("Chat_ListView>>>3>>>", asrRecognizer.toString()+" listener " + asrListener.toString());
 
+
         }
 
-        @Override //Log.e(">>>>>>", "onVoiceDataReceived-- data.length=" + length); Log.e(">>>>>>", "onVoiceDataReceived-- energy =" + energy);
-        public void onVoiceDataReceived(byte[] data, float energy, Bundle bundle) {int length = data == null ? 0 : data.length; }
+        @Override //Log.e(">>>>>>", "onVoiceDataReceived-- data.length=" + length);
+        public void onVoiceDataReceived(byte[] data, float energy, Bundle bundle) {
+            int length = data == null ? 0 : data.length;
+            // Log.d(">  >   >>>>", "onVoiceDataReceived-- energy =" + energy);
+        }
+
         @Override // If you don't add this, there will be no response after you cut the network
         public void onError(int error, String errorMessage) {Snackbar.make(imageViewRecording, getString(R.string.no_internet), Snackbar.LENGTH_SHORT);}
 
@@ -185,4 +233,7 @@ public class Chat_ListView extends BaseActivity{
     protected void onResume() {
         super.onResume();
     }
+
+    public native boolean webRtcVad_Process(short[] audioData, int offsetInshort, int readSize);
+
 }
