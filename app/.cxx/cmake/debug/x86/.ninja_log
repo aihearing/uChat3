@@ -1,0 +1,21 @@
+# ninja log v5
+35	9780	641793363	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/cross_correlation.c.o	714059aeb784cbf2
+40	9815	641793363	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/get_scaling_square.c.o	c2de0bd9c3632876
+38	9831	641793363	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/downsample_fast.c.o	c18801490d4c6455
+51	9856	641793363	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/min_max_operations.c.o	fb8f6b8800985280
+44	9884	641793363	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/division_operations.c.o	6a24b66f05d59e44
+47	9899	641793363	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/energy.c.o	7380c613fd4851de
+55	9921	641793363	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/resample_48khz.c.o	6fae6e0efb8849d4
+58	9936	641793363	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/resample_fractional.c.o	2d8f3750f13ad330
+9781	9990	641793363	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/resample_by_2_internal.c.o	f0b9159b5dd789ce
+9816	10263	641793363	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_filterbank.c.o	46942e2038d23571
+9936	10274	641793363	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vector_scaling_operations.c.o	a208d07386cf90d6
+9921	10386	641793363	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_sp.c.o	bb99d7f778dda9fe
+9832	10401	641793363	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/spl_init.c.o	2e32f9a09dcc55b8
+9991	10409	641793363	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/webrtc_vad.c.o	e24baeedf5e876d0
+9900	10452	641793364	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_gmm.c.o	fbbeffa0f43ea208
+9885	10728	641793364	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_core.c.o	e54c634e993d81de
+30	11766	641793365	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	85d14a125e72bcf6
+9856	11811	641793365	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad.cc.o	1fedcbc983de41ba
+33	11876	641793365	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/checks.cc.o	26cb00b4ef4b8dbc
+11876	13185	641793366	../../../../build/intermediates/cmake/debug/obj/x86/libnative-lib.so	79036f8921210ff9
