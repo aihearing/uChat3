@@ -36,7 +36,7 @@ public class ChatListView extends BaseActivity{
 
 
     static  String   pUserId, pUserName;
-    static  int      pUserAvaR, mMinBufferSize;
+    static  int      pUserAvaR, mMinBufferSize, mAudioSize;
 
     List<AMessage>    aList; // = new ArrayList<AMessage>();
     ListView          aListView;
@@ -112,15 +112,15 @@ public class ChatListView extends BaseActivity{
         @Override // 收尾。语音识别的文本数据，该接口并非运行在主线程中，返回结果需要在子线程中处理。
         public void onResults(Bundle results) {
             firstWord = true;       //本局结束。另起一行。
+
             if (mRecorder==null) {
                 mMinBufferSize = AudioRecord.getMinBufferSize(16000, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
                 mRecorder = new AudioRecord(MediaRecorder.AudioSource.MIC, 16000, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, mMinBufferSize * 2);
             }
 
-            mStartVAD = true;    //开始检测声音
             int readSize;
-            mMinBufferSize = 320;
-            short[] audioData = new short[mMinBufferSize];
+            mAudioSize = 320;
+            short[] audioData = new short[mAudioSize];
 
             if (mRecorder.getState() != AudioRecord.STATE_INITIALIZED) {
                 mRecorder.stop();
@@ -128,39 +128,34 @@ public class ChatListView extends BaseActivity{
             }
             mRecorder.startRecording();
 
+            mStartVAD = true;    //开始检测声音
             while (mStartVAD) {
                 if (null != mRecorder) {
-                    readSize = mRecorder.read(audioData, 0, mMinBufferSize);
+                    readSize = mRecorder.read(audioData, 0, mAudioSize);
 
-                    if (readSize == AudioRecord.ERROR_INVALID_OPERATION || readSize == AudioRecord.ERROR_BAD_VALUE) {
-                        continue;
-                    }
+                    if (readSize == AudioRecord.ERROR_INVALID_OPERATION || readSize == AudioRecord.ERROR_BAD_VALUE) {                        continue;                    }
                     if (readSize != 0 && readSize != -1) {
                         // 语音活动检测
                         mSpeaking = webRtcVad_Process(audioData, 0, readSize);
                         if (mSpeaking) {
-                            Log.d("TAG", ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>正在讲话");
-
-
+                            Log.e("TAG", ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>正在讲话");
+                            if (asrRecognizer!=null) {
+                                asrRecognizer.destroy();
+                                asrRecognizer=null;
+                                asrRecognizer= MLAsrRecognizer.createAsrRecognizer(ChatListView.this);    //a 用户调用接口创建一个语音识别器。
+                                asrRecognizer.setAsrListener(asrListener);                        //b 绑定个listener
+                            }
+                            asrRecognizer.startRecognizing(mIntent);
+                            Log.e("Chat_ListView>>>3>>>", asrRecognizer.toString()+" listener " + asrListener.toString());
+                            mStartVAD = false;      //停止检测
                         } else {
-                            Log.d("TAG", "=====当前无声音");
+                            Log.e("TAG", "=====当前无声音");
                         }
                     } else {
                         break;
                     }
                 }
             }
-
-            if (asrRecognizer!=null) {
-                asrRecognizer.destroy();
-                asrRecognizer=null;
-                asrRecognizer= MLAsrRecognizer.createAsrRecognizer(ChatListView.this);    //a 用户调用接口创建一个语音识别器。
-                asrRecognizer.setAsrListener(asrListener);                        //b 绑定个listener
-            }
-            asrRecognizer.startRecognizing(mIntent);
-            Log.e("Chat_ListView>>>3>>>", asrRecognizer.toString()+" listener " + asrListener.toString());
-
-
         }
 
         @Override //Log.e(">>>>>>", "onVoiceDataReceived-- data.length=" + length);
