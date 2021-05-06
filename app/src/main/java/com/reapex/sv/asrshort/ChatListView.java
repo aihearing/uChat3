@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.huawei.hms.mlsdk.asr.MLAsrConstants;
 import com.huawei.hms.mlsdk.asr.MLAsrListener;
@@ -26,14 +27,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ChatListView extends BaseActivity{
+public class ChatListView extends BaseActivity  implements View.OnClickListener {
     static ASRListener     asrListener;        // = new ASRListener();
-    static MLAsrRecognizer asrRecognizer;    // = MLAsrRecognizer.createAsrRecognizer();    //a 用户调用接口创建一个语音识别器。
-    static AudioRecord mRecorder;
+    static MLAsrRecognizer asrRecognizer;      // = MLAsrRecognizer.createAsrRecognizer();    //a 用户调用接口创建一个语音识别器。
+    static AudioRecord     mRecorder;
 
     static {System.loadLibrary("native-lib");}
     boolean mStartVAD, mSpeaking, firstWord = true;
 
+    MaterialButton mBtnStart, mBtnStop;
 
     static  String   pUserId, pUserName;
     static  int      pUserAvaR, mMinBufferSize, mAudioSize;
@@ -43,7 +45,7 @@ public class ChatListView extends BaseActivity{
     MyListViewAdapter aAdapter;
     Intent            mIntent;
 
-    ImageView imageViewRecording;
+    ImageView         imageViewRecording;
     AnimationDrawable animationRecording;
 
     @Override
@@ -51,12 +53,16 @@ public class ChatListView extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a_chat_list_view);               //a_activity_chat is listview
 
-        pUserId   = getIntent().getStringExtra("from1");        ((TextView)findViewById(R.id.text_view_from_user_name)).setText(pUserName);
+        pUserId   = getIntent().getStringExtra("from1");
         pUserName = getIntent().getStringExtra("from2");
         pUserAvaR = getIntent().getIntExtra("from3", R.mipmap.bg_me_press); //default bg_me_press
+        ((TextView)findViewById(R.id.text_view_from_user_name)).setText(pUserName);
 
         imageViewRecording  = findViewById(R.id.image_view_voice_recording_anim);
         aListView           = findViewById(R.id.list_view_message);
+
+        mBtnStart = findViewById(R.id.button_start);
+        mBtnStop  = findViewById(R.id.button_stop);
 
         aList    = new ArrayList<>(Arrays.asList(new AMessage("大家说，我听，您看。", "800", "你说", R.mipmap.default_user_avatar, false)));
         aAdapter = new MyListViewAdapter(ChatListView.this, aList);
@@ -69,7 +75,8 @@ public class ChatListView extends BaseActivity{
         mIntent.putExtra(MLAsrConstants.LANGUAGE, "zh-CN").putExtra(MLAsrConstants.FEATURE, MLAsrConstants.FEATURE_WORDFLUX);
     }
 
-    public void myClick(View view) {
+    @Override
+    public void onClick(View view) {
         if (view.getId() == R.id.button_start) {
             asrRecognizer.startRecognizing(mIntent);
 
