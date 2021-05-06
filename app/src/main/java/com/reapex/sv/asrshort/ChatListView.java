@@ -27,13 +27,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+// the pull-down notification bar does not go through any life cycle。It's onWindowFocusChanged. We don't monitor it here.
+// back, hide will invoke onPause. Ignore onResume.
+// asrRecognizer will kill itself after 6s silence, or 60s in talk.
+
 public class ChatListView extends BaseActivity  implements View.OnClickListener {
     static ASRListener     asrListener;        // = new ASRListener();
     static MLAsrRecognizer asrRecognizer;      // = MLAsrRecognizer.createAsrRecognizer();    //a 用户调用接口创建一个语音识别器。
     static AudioRecord     mRecorder;
 
     static {System.loadLibrary("native-lib");}
-    boolean mStartVAD, mSpeaking, firstWord = true;
+    boolean mStartVAD, mSpeaking, firstWord = true, clickStop;
 
     MaterialButton mBtnStart, mBtnStop;
 
@@ -79,13 +83,14 @@ public class ChatListView extends BaseActivity  implements View.OnClickListener 
     public void onClick(View view) {
         if (view.getId() == R.id.button_start) {
             asrRecognizer.startRecognizing(mIntent);
-
+            clickStop = false;
             animationRecording = (AnimationDrawable) imageViewRecording.getDrawable();
             animationRecording.start();
             ((TextView)findViewById(R.id.text_view_recording)).setText(getString(R.string.tv_click_to_stop));
             findViewById(R.id.button_stop).setVisibility(View.VISIBLE);
             findViewById(R.id.button_start).setVisibility(View.INVISIBLE);
         }else if (view.getId() == R.id.button_stop) {
+            clickStop = true;
             if (animationRecording != null && animationRecording.isRunning()) {animationRecording.stop();}
             ((TextView)findViewById(R.id.text_view_recording)).setText(getString(R.string.asr_start_recording));
             findViewById(R.id.button_stop).setVisibility(View.INVISIBLE);
@@ -119,7 +124,12 @@ public class ChatListView extends BaseActivity  implements View.OnClickListener 
         @Override // 收尾。语音识别的文本数据，该接口并非运行在主线程中，返回结果需要在子线程中处理。
         public void onResults(Bundle results) {
             firstWord = true;       //本局结束。另起一行。
+            if (!clickStop) {
+                vad();
+            }
+        }
 
+        public void vad(){
             if (mRecorder==null) {
                 mMinBufferSize = AudioRecord.getMinBufferSize(16000, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
                 mRecorder = new AudioRecord(MediaRecorder.AudioSource.MIC, 16000, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, mMinBufferSize * 2);
@@ -146,15 +156,8 @@ public class ChatListView extends BaseActivity  implements View.OnClickListener 
                         mSpeaking = webRtcVad_Process(audioData, 0, readSize);
                         if (mSpeaking) {
                             Log.e("TAG", ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>正在讲话");
-                            if (asrRecognizer!=null) {
-                                asrRecognizer.destroy();
-                                asrRecognizer=null;
-                                asrRecognizer= MLAsrRecognizer.createAsrRecognizer(ChatListView.this);    //a 用户调用接口创建一个语音识别器。
-                                asrRecognizer.setAsrListener(asrListener);                        //b 绑定个listener
-                            }
-                            asrRecognizer.startRecognizing(mIntent);
-                            Log.e("Chat_ListView>>>3>>>", asrRecognizer.toString()+" listener " + asrListener.toString());
                             mStartVAD = false;      //停止检测
+                            asr();
                         } else {
                             Log.e("TAG", "=====当前无声音");
                         }
@@ -163,6 +166,17 @@ public class ChatListView extends BaseActivity  implements View.OnClickListener 
                     }
                 }
             }
+        }
+
+        public void asr(){
+            if (asrRecognizer!=null) {
+                asrRecognizer.destroy();
+                asrRecognizer=null;
+                asrRecognizer= MLAsrRecognizer.createAsrRecognizer(ChatListView.this);    //a 用户调用接口创建一个语音识别器。
+                asrRecognizer.setAsrListener(asrListener);                        //b 绑定个listener
+            }
+            asrRecognizer.startRecognizing(mIntent);
+            Log.e("Chat_ListView>>>3>>>", asrRecognizer.toString()+" listener " + asrListener.toString());
         }
 
         @Override //Log.e(">>>>>>", "onVoiceDataReceived-- data.length=" + length);
@@ -203,38 +217,26 @@ public class ChatListView extends BaseActivity  implements View.OnClickListener 
     @Override
     protected void onPause() {              // backend run, stop ASR
         super.onPause();
-        stopASR("onPause");
+        Log.e("onPause", "---------");
+        stopASR();
     }
 
-    void stopASR(String src){
-//        if (oASRManager != null) {
-//            oASRManager.destroy();
-//            oASRManager = null;        }
-        if (src.equals("onPause")) {
-            if (animationRecording != null && animationRecording.isRunning()) {animationRecording.stop();}
-            findViewById(R.id.button_stop).setVisibility(View.INVISIBLE);
-            findViewById(R.id.button_start).setVisibility(View.VISIBLE);
-            ((TextView)findViewById(R.id.text_view_recording)).setText(getString(R.string.asr_back));
-        }else if (src.equals("button_stop")) {
-            if (animationRecording != null && animationRecording.isRunning()) {animationRecording.stop();}
-            findViewById(R.id.button_stop).setVisibility(View.INVISIBLE);
-            findViewById(R.id.button_start).setVisibility(View.VISIBLE);
-            ((TextView)findViewById(R.id.text_view_recording)).setText(getString(R.string.asr_start_recording));
-        }else if (src.equals("on6s")) {
-            ((TextView)findViewById(R.id.text_view_recording)).setText(getString(R.string.asr_sleeping));
-        }
+    void stopASR(){
+        clickStop = true;
+        findViewById(R.id.button_stop).setVisibility(View.INVISIBLE);
+        findViewById(R.id.button_start).setVisibility(View.VISIBLE);
+        if (animationRecording != null && animationRecording.isRunning()) {animationRecording.stop();}
+        ((TextView)findViewById(R.id.text_view_recording)).setText(getString(R.string.asr_back));
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        stopASR("button_stop");
+        stopASR();
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
+    protected void onResume() {        super.onResume();    }
 
     public native boolean webRtcVad_Process(short[] audioData, int offsetInshort, int readSize);
 

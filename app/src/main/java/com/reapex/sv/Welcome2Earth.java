@@ -70,7 +70,7 @@ public class Welcome2Earth extends FragmentActivity
             this.getRuntimePermissions();           //2. 有问题，则去获取
         }
         if(!MySP.getInstance().getDisclaimer().equals("AGREE")){
-            disclaimer();
+//            disclaimer();
         }
     }
 
@@ -133,7 +133,7 @@ public class Welcome2Earth extends FragmentActivity
         super.onPause();
         if (dialog != null) { dialog.dismiss(); dialog = null;}
         if(!MySP.getInstance().getDisclaimer().equals("AGREE")){
-            disclaimer();
+//            disclaimer();
         }
     }
 

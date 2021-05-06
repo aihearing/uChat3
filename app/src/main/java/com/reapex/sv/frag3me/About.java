@@ -51,7 +51,7 @@ public class About extends BaseActivity implements View.OnClickListener {
             startActivity(intent);
         }else if(view.getId()== R.id.relative_layout_tutorial){
             Intent intent = new Intent(this, Intro.class);
-            intent.putExtra("from", "tutorial");
+            intent.putExtra("from", "intro");
             startActivity(intent);
         }else if(view.getId()== R.id.relative_layout_complain){
             Intent intent = new Intent(this, SVQRCode.class);

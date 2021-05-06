@@ -46,6 +46,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="introClick"
         android:layout_marginStart="25dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="25dp"
@@ -111,7 +112,7 @@
         </RelativeLayout>
 
         <ImageView
-            android:id="@+id/image_view_animation"
+            android:id="@+id/image_view_intro"
             android:layout_width="match_parent"
             android:layout_height="459dp"
             android:layout_gravity="center_horizontal"
@@ -124,6 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/scan_qr_code_and_add_friends"
+            android:textAlignment="center"
             android:textColor="#999999"
             android:textSize="14sp" />
     </LinearLayout>

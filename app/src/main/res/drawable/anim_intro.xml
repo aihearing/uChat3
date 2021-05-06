@@ -5,20 +5,20 @@
     android:oneshot="false">
     <item
         android:drawable="@mipmap/uchat1"
-        android:duration="600"></item>
+        android:duration="5600"></item>
     <item
         android:drawable="@mipmap/uchat2"
-        android:duration="800"></item>
+        android:duration="5800"></item>
     <item
         android:drawable="@mipmap/uchat3"
-        android:duration="200"></item>
+        android:duration="6200"></item>
     <item
         android:drawable="@mipmap/uchat4"
-        android:duration="200"></item>
+        android:duration="6200"></item>
     <item
         android:drawable="@mipmap/uchat5"
-        android:duration="200"></item>
+        android:duration="6200"></item>
     <item
         android:drawable="@mipmap/uchat6"
-        android:duration="200"></item>
+        android:duration="6000"></item>
 </animation-list>
