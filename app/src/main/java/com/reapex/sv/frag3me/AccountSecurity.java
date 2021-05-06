@@ -62,6 +62,7 @@ public class AccountSecurity extends BaseActivity implements View.OnClickListene
 
         }else if (view.getId()==  R.id.rl_close_account){
             startActivity(new Intent(AccountSecurity.this, CloseAccount.class));
+
         }else if (view.getId()==  R.id.rl_wechat_services){
             Intent intent = new Intent(AccountSecurity.this, SVQRCode.class);
             intent.putExtra("from", "AccountSecurity");

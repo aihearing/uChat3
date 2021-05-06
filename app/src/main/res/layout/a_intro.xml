@@ -111,20 +111,18 @@
         </RelativeLayout>
 
         <ImageView
-            android:layout_width="270dp"
-            android:layout_height="270dp"
+            android:id="@+id/image_view_animation"
+            android:layout_width="match_parent"
+            android:layout_height="459dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="35dp"
-            android:src="@mipmap/icon_default_qr_code_big"
-            android:contentDescription="@string/company_name"/>
+            android:contentDescription="@string/company_name"
+            android:src="@drawable/anim_intro" />
 
         <TextView
             android:id="@+id/text_view_below_qr_code"
             android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="35dp"
-            android:layout_marginBottom="18dp"
             android:text="@string/scan_qr_code_and_add_friends"
             android:textColor="#999999"
             android:textSize="14sp" />

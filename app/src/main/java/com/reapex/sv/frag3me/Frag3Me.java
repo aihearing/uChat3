@@ -78,7 +78,7 @@ public class Frag3Me extends Fragment implements View.OnClickListener {
         }else if(view.getId()== R.id.relative_layout_general){
             startActivity(new Intent(getActivity(), Setting.class));
         }else if(view.getId()== R.id.relative_layout_upgrade){
-            Intent intent = new Intent(getActivity(), MyWeb.class);
+            Intent intent = new Intent(getActivity(), SVQRCode.class);
             intent.putExtra("from", "upgrade");
             startActivity(intent);
         }else if(view.getId()== R.id.relative_layout_about){

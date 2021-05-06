@@ -50,7 +50,7 @@ public class About extends BaseActivity implements View.OnClickListener {
             intent.putExtra("from", "web");
             startActivity(intent);
         }else if(view.getId()== R.id.relative_layout_tutorial){
-            Intent intent = new Intent(this, MyWeb.class);
+            Intent intent = new Intent(this, Intro.class);
             intent.putExtra("from", "tutorial");
             startActivity(intent);
         }else if(view.getId()== R.id.relative_layout_complain){

@@ -2,6 +2,7 @@
     <string name="app_name">见声看见</string>
     <string name="company_name">见声科技</string>
     <string name="company_web">公司官网</string>
+    <string name="company_mp">公众号：seeingVoice</string>
     <string name="complain">投诉与建议</string>
     <string name="security_center">安全中心客服</string>
     <string name="security_center_msg">请扫码安全中心微信公众号获得帮助。</string>
@@ -26,6 +27,9 @@
     <string name="asr_sleeping">进入无声休眠状态\n点击按钮恢复服务</string>
     <string name="asr_back">欢迎回到见声看见\n点击按钮继续你说我看</string>
     <string name="asr_start_recording">本地系统正常\n请点击按钮开始</string>
+    <string name="upgrade">见声采用40DADOW云技术确保专用通道用户流畅使用的同时，尽可能提升共享通道的体验。
+        \n\n应广大用户要求，公司从6月1日起
+        每个月提供30分钟-300分钟的专用通道体验券。欢迎通过如上微信公众号索取。</string>
 
     <string name="permission_rationale">需要麦克风权限获取说话声音、存储权限保存记录及头像。</string>
     <string name="disclaimer_content">请您务必审慎阅读、充分理解《隐私政策》和《用户协议》各条款，包括但不限于：
@@ -53,7 +57,7 @@
 
     <string name="tab_chats">你说</string>
     <string name="tab_contacts">语境</string>
-    <string name="tab_discover">发现</string>
+    <string name="tab_discover">VIP</string>
     <string name="tab_me">我</string>
 
     <string name="str_ok">确定</string>
@@ -71,7 +75,7 @@
     <string name="code3">603</string>
     <string name="contact4">嘈杂</string>
     <string name="code4">604</string>
-    <string name="contact5">说话转文字专用通道</string>
+    <string name="contact5">用通道</string>
     <string name="code5">605</string>
     <string name="contact6">声音预警</string>
     <string name="code6">606</string>

@@ -1,43 +1,45 @@
 package com.reapex.sv.frag3me;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.text.TextPaint;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.reapex.sv.BaseActivity;
-import com.reapex.sv.R;
 import com.reapex.sv.Constant;
 import com.reapex.sv.MySP;
+import com.reapex.sv.R;
 
 /**
  * @author  LeoReny@hypech.com
  * @version 1.0
  * @since   2021-04-07
  */
-public class SVQRCode extends BaseActivity {
+public class Intro extends BaseActivity {
+
+    AnimationDrawable animationDrawable;
+    ImageView         imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.a_qr_code);
-
-        ImageView mAvatar = findViewById(R.id.iv_avatar);
-        ImageView mSexIv  = findViewById(R.id.iv_sex);
-        if (Constant.USER_SEX_FEMALE.equals(MySP.getInstance().getUGender())) {
-            mSexIv.setImageResource(R.mipmap.icon_sex_male);
-            mAvatar.setImageResource(R.mipmap.customerservicemale);
-        } else {
-            mSexIv.setImageResource(R.mipmap.icon_sex_female);
-            mAvatar.setImageResource(R.mipmap.customerservicefemale);
-        }
+        setContentView(R.layout.a_intro);
 
         TextView mTitleTv= findViewById(R.id.text_view_title);
         TextPaint paint = mTitleTv.getPaint();
         paint.setFakeBoldText(true);
+        ((ImageView)findViewById(R.id.iv_avatar)).setImageResource(R.mipmap.customerservicefemale);
+
+        imageView = findViewById(R.id.image_view_animation);
 
         TextView mBelowName= findViewById(R.id.text_view_below_company);
         TextView mBelowQR  = findViewById(R.id.text_view_below_qr_code);
+
+        animationDrawable = (AnimationDrawable) imageView.getDrawable();
+        animationDrawable.start();
+
 
         String src = getIntent().getStringExtra("from");
 

@@ -9,11 +9,13 @@ public class Constant {
     // long currentTime = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis());
 //    public static final String URL = "https://seeingvoice.com";      //中文
     public static final String URL = "https://seeingvoice.gitee.io";      //中文
+
     public static final String URL_UPGRADE         = URL+"/youchat/";        //关于我们
     public static final String URL_COMPLAIN         = URL+"/contact/";        //关于我们
     public static final String URL_TUTORIAL         = URL+"/youchat/";        //关于我们
-    public static final String URL_PRIVACY          = URL+"/privacy/";      //隐私政策
-    public static final String URL_USER_AGREEMENT   = URL+"/terms/";        //用户协议
+
+    public static final String URL_PRIVACY          = "file:///android_asset/privacy.html";      //隐私政策
+    public static final String URL_USER_AGREEMENT   = "file:///android_asset/terms.html";        //用户协议
 
     //通知应用状态发生改变，该接口并非运行在主线程中，返回结果需要在子线程中处理。
     //STATE_LISTENING        //onState回调中的状态码，表示录音机已经准备好。      //Constant Value：1
