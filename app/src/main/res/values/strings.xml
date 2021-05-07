@@ -1,7 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation,ExtraTranslation">
     <string name="app_name">见声看见</string>
     <string name="company_name">见声科技</string>
-    <string name="company_web">公司官网</string>
+    <string name="company_web">保持联系</string>
+    <string name="url">http://seeingVoice.com</string>
     <string name="company_mp">公众号：seeingVoice</string>
     <string name="complain">投诉与建议</string>
     <string name="security_center">安全中心客服</string>
@@ -76,7 +77,7 @@
     <string name="code3">603</string>
     <string name="contact4">嘈杂</string>
     <string name="code4">604</string>
-    <string name="contact5">用通道</string>
+    <string name="contact5">专用通道</string>
     <string name="code5">605</string>
     <string name="contact6">声音预警</string>
     <string name="code6">606</string>
@@ -277,6 +278,17 @@
     <string name="request_permission_storage">为确保接收到的图片、视频等内容能被正常浏览，听友需要申请手机存储权限。</string>
     <string name="request_permission_record_audio">在设置-应用-听友-权限中开启麦克风权限，以正常使用语音、小视频、摇一摇功能</string>
     <string name="request_permission_contacts">在设置-应用-听友-权限中开启通讯录权限，以正常使用联系人查找功能</string>
+    <string name="request_permission_title">权限说明</string>
+    <string name="request_permission_granted_storage">已授权，请选择您喜欢的头像。</string>
+    <string name="request_permission_granted">已授权，请点击<b>开始</b>体验<b>你说我看</b>。</string>
+
+    <string name="permission_rationale_record">需要麦克风权限转化声音为文字，实现你说我看的功能。</string>
+    <string name="permission_rationale_storage">需要存储权限保存记录及头像。</string>
+
+    <string name="agree">同意</string>
+    <string name="disclaimer_button">协议和隐私</string>
+
+
 
     <string name="moments">升级</string>
     <string name="scan">扫一扫</string>

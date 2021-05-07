@@ -1,7 +1,11 @@
 package com.reapex.sv;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,12 +18,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.reapex.sv.db.AChatDB;
 import com.reapex.sv.db.AUser;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import static com.reapex.sv.MyUtil.validatePassword;
@@ -37,7 +45,7 @@ public class Register extends BaseActivity implements View.OnClickListener {
     EditText  mNickNameEt, mPhoneEt, mPasswordEt;
     Button    mRegisterBtn;
 
-    boolean mAgree = true;   //是否同意协议
+    boolean mAgree;   //是否同意协议
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,7 +78,36 @@ public class Register extends BaseActivity implements View.OnClickListener {
         mNickNameEt.addTextChangedListener(new TextChange());
         mPhoneEt.addTextChangedListener(new TextChange());
         mPasswordEt.addTextChangedListener(new TextChange());
+
+        //permissions
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+            Log.e(TAG, "permission granted.");
+        }else if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            showExplanation(getString(R.string.request_permission_title), getString(R.string.permission_rationale_storage), android.Manifest.permission.READ_EXTERNAL_STORAGE);
+        } else {
+            requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE);
+        }
     }
+
+    private void showExplanation(String title, String message, final String permission) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title).setMessage(message).setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE);
+            }
+        });
+        builder.create().show();
+    }
+
+    private ActivityResultLauncher<String> requestPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+        if (isGranted) {
+            Toast.makeText(this, getString(R.string.request_permission_granted_storage), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, getString(R.string.permission_rationale_storage), Toast.LENGTH_LONG).show();
+        }
+    });
+
+
 
     public void back(View view) {
         finish();
@@ -82,7 +119,7 @@ public class Register extends BaseActivity implements View.OnClickListener {
             String nickName = mNickNameEt.getText().toString();
             String phone    = mPhoneEt.getText().toString();
             String password = mPasswordEt.getText().toString();
-             if(!MyUtil.isValidChinesePhone(phone)) {
+            if(!MyUtil.isValidChinesePhone(phone)) {
                 Snackbar sb = Snackbar.make(mLayout, getString(R.string.phone_wrong), Snackbar.LENGTH_SHORT);
                 sb.getView().setBackgroundColor(Color.WHITE);
                 sb.getView().findViewById(com.google.android.material.R.id.snackbar_text).setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -116,15 +153,6 @@ public class Register extends BaseActivity implements View.OnClickListener {
             intent = new Intent(Intent.ACTION_PICK, null);
             intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
             startActivityForResult(intent, UPDATE_AVATAR_BY_ALBUM);
-        }else if (v.getId() == R.id.image_view_agree){
-            if (mAgree) {
-                mAgreementIv.setBackgroundResource(R.mipmap.icon_choose_false);
-                mAgree = false;
-            } else {
-                mAgreementIv.setBackgroundResource(R.mipmap.icon_choose_true);
-                mAgree = true;
-            }
-            checkSubmit();
         }else if (v.getId() == R.id.text_view_agreement){
             Intent intent = new Intent(this, MyWeb.class);
             intent.putExtra("from", "agreement");
@@ -183,7 +211,7 @@ public class Register extends BaseActivity implements View.OnClickListener {
         int i = 1;
 
         AUser u2 = new AUser(phone, nickName,  password, avatar, u2WxId);
-                db.getUserDao().insert(u2);
+        db.getUserDao().insert(u2);
 
         Log.e(TAG,  "  avatar: " + u2.getUserAvatarUri());
         // 登录成功后设置user和isLogin至sharedpreferences中

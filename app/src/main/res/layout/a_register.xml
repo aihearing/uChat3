@@ -220,7 +220,7 @@
         android:layout_centerVertical="true"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="16dp"
-        android:background="@mipmap/icon_choose_true"
+        android:background="@mipmap/icon_choose_false"
         app:layout_constraintBottom_toTopOf="@+id/btn_register"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="ContentDescription" />
@@ -231,7 +231,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="16dp"
-        android:text="@string/global_read"
+        android:text="@string/agree"
         android:textSize="13sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_register"
         app:layout_constraintStart_toEndOf="@+id/image_view_agree" />

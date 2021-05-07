@@ -46,7 +46,7 @@ public class About extends BaseActivity implements View.OnClickListener {
             intent.putExtra("from", "privacy");
             startActivity(intent);
         }else if(view.getId()== R.id.relative_layout_web){
-            Intent intent = new Intent(this, MyWeb.class);
+            Intent intent = new Intent(this, SVQRCode.class);
             intent.putExtra("from", "web");
             startActivity(intent);
         }else if(view.getId()== R.id.relative_layout_tutorial){

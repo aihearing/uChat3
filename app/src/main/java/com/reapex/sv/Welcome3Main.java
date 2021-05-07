@@ -1,19 +1,27 @@
 package com.reapex.sv;
 
+import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.reapex.sv.asrlong.ChatVIP;
 import com.reapex.sv.db.AChatDB;
 import com.reapex.sv.frag3me.Frag3Me;
@@ -60,6 +68,14 @@ public class Welcome3Main extends BaseActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 //        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            String avatar = (Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"
+                    + getResources().getResourcePackageName(R.mipmap.default_user_avatar) + "/"
+                    + getResources().getResourceTypeName(R.mipmap.default_user_avatar) + "/"
+                    + getResources().getResourceEntryName(R.mipmap.default_user_avatar))).toString();
+            MySP.getInstance().setUAvatar(avatar);
+        }
+
         db = AChatDB.getDatabase(this);
         initView();
     }
@@ -94,30 +110,46 @@ public class Welcome3Main extends BaseActivity {
     }
 
     public void onTabClicked(View view) {
-        if (view.getId() == R.id.rl_chat){
+        if (view.getId() == R.id.rl_chat) {
             mIndex = 0;
-//            StatusBarUtil.setStatusBarColor(MainActivity.this, R.color.wechat_common_bg);
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.wechat_common_bg));
-
             mFrag0.getParentFragmentManager().beginTransaction().detach(mFrag0).commit();
             mFrag0.getParentFragmentManager().beginTransaction().attach(mFrag0).commit();
-
-        }else if(view.getId() == R.id.rl_scenario){
+        } else if (view.getId() == R.id.rl_scenario) {
             mIndex = 1;
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.wechat_common_bg));
-        }else if(view.getId() == R.id.rl_discover){
+        } else if (view.getId() == R.id.rl_discover) {
 //            mIndex = 3;
-            Intent intent = new Intent(this , ChatVIP.class);
-            this.startActivity(intent);
+            EditText editText = new EditText(this);
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setTitle(getString(R.string.input_code));
+            dialog.setView(editText);
+            dialog.setCancelable(false);
+            dialog.setPositiveButton(getString(R.string.str_ok), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Snackbar sb = Snackbar.make(view, editText.getText().toString() + getString(R.string.code_wrong), Snackbar.LENGTH_SHORT);
+                    sb.getView().setBackgroundColor(Color.RED);
+                    sb.getView().findViewById(com.google.android.material.R.id.snackbar_text).setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    sb.setAnchorView(view.findViewById(R.id.relative_asrlong));
+                    sb.show();
+                }
+            });
+            dialog.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+            dialog.show();
+
+//            Intent intent = new Intent(this , ChatVIP.class);
+//            this.startActivity(intent);
         }else if(view.getId() == R.id.rl_me){
             mIndex = 2;
-//           StatusBarUtil.setStatusBarColor(MainActivity.this, R.color.bottom_text_color_normal);
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.bottom_text_color_normal));
         }
         Log.e(TAG, "midnex" + mIndex);
 
-
-//        if (mIndex==3) mIndex=1;
         if (mCurrentTabIndex != mIndex) {
             FragmentTransaction trx = getSupportFragmentManager().beginTransaction();
             trx.hide(mFragments[mCurrentTabIndex]);

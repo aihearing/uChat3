@@ -44,6 +44,10 @@ public class SVQRCode extends BaseActivity {
         if (src.equals("AccountSecurity")){
             mBelowName.setText(getString(R.string.security_center));
             mBelowQR.setText(getString(R.string.security_center_msg));
+        }else if (src.equals("web")){
+            mTitleTv.setText(getString(R.string.company_web));
+            mBelowName.setText(getString(R.string.url));
+            mBelowQR.setText("");
         }else if (src.equals("help")){
             mBelowName.setText(getString(R.string.uchat));
             mBelowQR.setText(getString(R.string.scan_qr_code_and_add_friends));

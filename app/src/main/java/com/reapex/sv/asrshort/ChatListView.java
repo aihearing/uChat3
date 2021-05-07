@@ -1,6 +1,9 @@
 package com.reapex.sv.asrshort;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
@@ -11,8 +14,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -26,6 +35,8 @@ import com.reapex.sv.db.AMessage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 // the pull-down notification bar does not go through any life cycle。It's onWindowFocusChanged. We don't monitor it here.
 // back, hide will invoke onPause. Ignore onResume.
@@ -77,7 +88,41 @@ public class ChatListView extends BaseActivity  implements View.OnClickListener 
         asrRecognizer.setAsrListener(asrListener);                        //b 绑定个listener
         mIntent = new Intent(MLAsrConstants.ACTION_HMS_ASR_SPEECH);
         mIntent.putExtra(MLAsrConstants.LANGUAGE, "zh-CN").putExtra(MLAsrConstants.FEATURE, MLAsrConstants.FEATURE_WORDFLUX);
+
+        //permissions
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED){
+            Log.e(TAG, "permission granted.");
+        }else if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECORD_AUDIO)) {
+            showExplanation(getString(R.string.request_permission_title), getString(R.string.permission_rationale_record), Manifest.permission.RECORD_AUDIO);
+        } else {
+            requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO);
+        }
+
     }
+
+    private void showExplanation(String title, String message, final String permission) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title).setMessage(message).setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO);
+            }
+        });
+        builder.create().show();
+    }
+
+    // Register the permissions callback, which handles the user's response to the
+    // system permissions dialog. Save the return value, an instance of
+    // ActivityResultLauncher, as an instance variable.
+    private ActivityResultLauncher<String> requestPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+        if (isGranted) {
+            Toast.makeText(this, getString(R.string.request_permission_granted), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, getString(R.string.request_permission_record_audio), Toast.LENGTH_LONG).show();
+            finish();
+        }
+    });
+
+
 
     @Override
     public void onClick(View view) {
