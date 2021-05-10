@@ -1,0 +1,1 @@
+A:\ASCode\uChat3\app\build\intermediates\cmake\release\obj\x86_64
