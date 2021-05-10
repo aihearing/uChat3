@@ -5,6 +5,9 @@
     <color name="home_middle_text_color">#333333</color>
     <color name="color_common_blue">#3fbded</color>
 
+    <color name="dot_incative">#a3a3a3</color>
+    <color name="dot_active">#ffffff</color>
+
     <color name="wechat_common_bg">#EDEDED</color>
     <color name="moments_common_bg">#EEEEEE</color>
     <color name="common_divider_view">#EDEDED</color>

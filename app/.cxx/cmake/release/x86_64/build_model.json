@@ -1,13 +1,17 @@
 {
   "abi": "X86_64",
-  "abiPlatformVersion": 23,
-  "buildSettings": {
-    "environmentVariables": []
+  "info": {
+    "abi": "X86_64",
+    "bitness": 64,
+    "deprecated": false,
+    "default": true
   },
+  "originalCxxBuildFolder": "A:\\ASCode\\uChat3\\app\\.cxx\\cmake\\release\\x86_64",
+  "cxxBuildFolder": "A:\\ASCode\\uChat3\\app\\.cxx\\cmake\\release\\x86_64",
+  "abiPlatformVersion": 23,
   "cmake": {
-    "cmakeArtifactsBaseFolder": "A:\\ASCode\\uChat3\\app\\.cxx\\cmake\\release\\x86_64",
-    "cmakeServerLogFile": "A:\\ASCode\\uChat3\\app\\.cxx\\cmake\\release\\x86_64\\cmake_server_log.txt",
     "cmakeWrappingBaseFolder": "A:\\ASCode\\uChat3\\app\\.cxx\\cxx\\release\\x86_64",
+    "cmakeArtifactsBaseFolder": "A:\\ASCode\\uChat3\\app\\.cxx\\cmake\\release\\x86_64",
     "effectiveConfiguration": {
       "name": "traditional-android-studio-cmake-environment",
       "description": "Composite reified CMakeSettings configuration",
@@ -16,7 +20,7 @@
         "ndk"
       ],
       "buildRoot": "A:\\ASCode\\uChat3\\app\\.cxx\\cmake\\release\\x86_64",
-      "cmakeToolchain": "D:\\Program\\Android\\SDK\\ndk\\21.1.6352462\\build\\cmake\\android.toolchain.cmake",
+      "cmakeToolchain": "D:\\Program\\Android\\SDK\\ndk\\21.4.7075529\\build\\cmake\\android.toolchain.cmake",
       "cmakeExecutable": "D:\\Program\\Android\\SDK\\cmake\\3.10.2.4988404\\bin\\cmake.exe",
       "variables": [
         {
@@ -29,7 +33,7 @@
         },
         {
           "name": "CMAKE_TOOLCHAIN_FILE",
-          "value": "D:\\Program\\Android\\SDK\\ndk\\21.1.6352462\\build\\cmake\\android.toolchain.cmake"
+          "value": "D:\\Program\\Android\\SDK\\ndk\\21.4.7075529\\build\\cmake\\android.toolchain.cmake"
         },
         {
           "name": "ANDROID_ABI",
@@ -37,7 +41,7 @@
         },
         {
           "name": "ANDROID_NDK",
-          "value": "D:\\Program\\Android\\SDK\\ndk\\21.1.6352462"
+          "value": "D:\\Program\\Android\\SDK\\ndk\\21.4.7075529"
         },
         {
           "name": "ANDROID_PLATFORM",
@@ -49,7 +53,7 @@
         },
         {
           "name": "CMAKE_ANDROID_NDK",
-          "value": "D:\\Program\\Android\\SDK\\ndk\\21.1.6352462"
+          "value": "D:\\Program\\Android\\SDK\\ndk\\21.4.7075529"
         },
         {
           "name": "CMAKE_EXPORT_COMPILE_COMMANDS",
@@ -57,6 +61,10 @@
         },
         {
           "name": "CMAKE_LIBRARY_OUTPUT_DIRECTORY",
+          "value": "A:\\ASCode\\uChat3\\app\\build\\intermediates\\cmake\\release\\obj\\x86_64"
+        },
+        {
+          "name": "CMAKE_RUNTIME_OUTPUT_DIRECTORY",
           "value": "A:\\ASCode\\uChat3\\app\\build\\intermediates\\cmake\\release\\obj\\x86_64"
         },
         {
@@ -76,49 +84,76 @@
           "value": "c++_static"
         }
       ]
-    }
+    },
+    "cmakeServerLogFile": "A:\\ASCode\\uChat3\\app\\.cxx\\cmake\\release\\x86_64\\cmake_server_log.txt"
   },
-  "cxxBuildFolder": "A:\\ASCode\\uChat3\\app\\.cxx\\cmake\\release\\x86_64",
-  "info": {
-    "abi": "X86_64",
-    "bitness": 64,
-    "deprecated": false,
-    "default": true
-  },
-  "originalCxxBuildFolder": "A:\\ASCode\\uChat3\\app\\.cxx\\cmake\\release\\x86_64",
   "variant": {
     "buildSystemArgumentList": [
       "-DANDROID_STL\u003dc++_static"
     ],
-    "buildTargetSet": [],
-    "implicitBuildTargetSet": [],
     "cFlagsList": [],
-    "cmakeSettingsConfiguration": "android-gradle-plugin-predetermined-name",
     "cppFlagsList": [
       ""
     ],
+    "variantName": "release",
+    "objFolder": "A:\\ASCode\\uChat3\\app\\build\\intermediates\\cmake\\release\\obj",
+    "soFolder": "A:\\ASCode\\uChat3\\app\\build\\intermediates\\cmake\\release\\lib",
     "isDebuggableEnabled": false,
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86",
+      "X86_64"
+    ],
+    "buildTargetSet": [],
+    "implicitBuildTargetSet": [],
+    "cmakeSettingsConfiguration": "android-gradle-plugin-predetermined-name",
     "module": {
-      "buildSystem": "CMAKE",
-      "cmake": {
-        "cmakeExe": "D:\\Program\\Android\\SDK\\cmake\\3.10.2.4988404\\bin\\cmake.exe",
-        "minimumCmakeVersion": "3.10.2",
-        "ninjaExe": "D:\\Program\\Android\\SDK\\cmake\\3.10.2.4988404\\bin\\ninja.exe"
-      },
-      "cmakeToolchainFile": "D:\\Program\\Android\\SDK\\ndk\\21.1.6352462\\build\\cmake\\android.toolchain.cmake",
       "cxxFolder": "A:\\ASCode\\uChat3\\app\\.cxx",
-      "gradleModulePathName": ":app",
+      "splitsAbiFilterSet": [],
       "intermediatesFolder": "A:\\ASCode\\uChat3\\app\\build\\intermediates",
-      "makeFile": "A:\\ASCode\\uChat3\\app\\CMakeLists.txt",
-      "moduleBuildFile": "A:\\ASCode\\uChat3\\app\\build.gradle",
+      "gradleModulePathName": ":app",
       "moduleRootFolder": "A:\\ASCode\\uChat3\\app",
+      "moduleBuildFile": "A:\\ASCode\\uChat3\\app\\build.gradle",
+      "makeFile": "A:\\ASCode\\uChat3\\app\\CMakeLists.txt",
+      "buildSystem": "CMAKE",
+      "ndkFolder": "D:\\Program\\Android\\SDK\\ndk\\21.4.7075529",
+      "ndkVersion": "21.4.7075529",
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
       "ndkDefaultAbiList": [
         "ARMEABI_V7A",
         "ARM64_V8A",
         "X86",
         "X86_64"
       ],
-      "ndkFolder": "D:\\Program\\Android\\SDK\\ndk\\21.1.6352462",
+      "ndkDefaultStl": "LIBCXX_STATIC",
+      "ndkMetaPlatforms": {
+        "min": 16,
+        "max": 30,
+        "aliases": {
+          "20": 19,
+          "25": 24,
+          "J": 16,
+          "J-MR1": 17,
+          "J-MR2": 18,
+          "K": 19,
+          "L": 21,
+          "L-MR1": 22,
+          "M": 23,
+          "N": 24,
+          "N-MR1": 24,
+          "O": 26,
+          "O-MR1": 27,
+          "P": 28,
+          "Q": 29,
+          "R": 30
+        }
+      },
       "ndkMetaAbiList": [
         {
           "abi": "ARMEABI_V7A",
@@ -145,68 +180,43 @@
           "default": true
         }
       ],
-      "ndkMetaPlatforms": {
-        "min": 16,
-        "max": 29,
-        "aliases": {
-          "20": 19,
-          "25": 24,
-          "J": 16,
-          "J-MR1": 17,
-          "J-MR2": 18,
-          "K": 19,
-          "L": 21,
-          "L-MR1": 22,
-          "M": 23,
-          "N": 24,
-          "N-MR1": 24,
-          "O": 26,
-          "O-MR1": 27,
-          "P": 28,
-          "Q": 29
-        }
+      "originalCmakeToolchainFile": "D:\\Program\\Android\\SDK\\ndk\\21.4.7075529\\build\\cmake\\android.toolchain.cmake",
+      "cmakeToolchainFile": "D:\\Program\\Android\\SDK\\ndk\\21.4.7075529\\build\\cmake\\android.toolchain.cmake",
+      "cmake": {
+        "isValidCmakeAvailable": true,
+        "cmakeExe": "D:\\Program\\Android\\SDK\\cmake\\3.10.2.4988404\\bin\\cmake.exe",
+        "minimumCmakeVersion": "3.10.2",
+        "ninjaExe": "D:\\Program\\Android\\SDK\\cmake\\3.10.2.4988404\\bin\\ninja.exe",
+        "isPreferCmakeFileApiEnabled": true
       },
-      "ndkSupportedAbiList": [
-        "ARMEABI_V7A",
-        "ARM64_V8A",
-        "X86",
-        "X86_64"
-      ],
-      "ndkDefaultStl": "LIBCXX_STATIC",
-      "ndkVersion": "21.1.6352462",
-      "project": {
-        "compilerSettingsCacheFolder": "A:\\ASCode\\uChat3\\.cxx",
-        "cxxFolder": "A:\\ASCode\\uChat3\\.cxx",
-        "isBuildOnlyTargetAbiEnabled": true,
-        "isCmakeBuildCohabitationEnabled": false,
-        "isNativeCompilerSettingsCacheEnabled": false,
-        "rootBuildGradleFolder": "A:\\ASCode\\uChat3",
-        "sdkFolder": "D:\\Program\\Android\\SDK",
-        "isPrefabEnabled": false
-      },
-      "splitsAbiFilterSet": [],
       "stlSharedObjectMap": {
         "LIBCXX_SHARED": {
-          "ARMEABI_V7A": "D:\\Program\\Android\\SDK\\ndk\\21.1.6352462\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\arm-linux-androideabi\\libc++_shared.so",
-          "ARM64_V8A": "D:\\Program\\Android\\SDK\\ndk\\21.1.6352462\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\aarch64-linux-android\\libc++_shared.so",
-          "X86": "D:\\Program\\Android\\SDK\\ndk\\21.1.6352462\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\i686-linux-android\\libc++_shared.so",
-          "X86_64": "D:\\Program\\Android\\SDK\\ndk\\21.1.6352462\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\x86_64-linux-android\\libc++_shared.so"
+          "ARMEABI_V7A": "D:\\Program\\Android\\SDK\\ndk\\21.4.7075529\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\arm-linux-androideabi\\libc++_shared.so",
+          "ARM64_V8A": "D:\\Program\\Android\\SDK\\ndk\\21.4.7075529\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\aarch64-linux-android\\libc++_shared.so",
+          "X86": "D:\\Program\\Android\\SDK\\ndk\\21.4.7075529\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\i686-linux-android\\libc++_shared.so",
+          "X86_64": "D:\\Program\\Android\\SDK\\ndk\\21.4.7075529\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\x86_64-linux-android\\libc++_shared.so"
         },
         "LIBCXX_STATIC": {},
         "NONE": {},
         "SYSTEM": {}
-      }
+      },
+      "project": {
+        "rootBuildGradleFolder": "A:\\ASCode\\uChat3",
+        "cxxFolder": "A:\\ASCode\\uChat3\\.cxx",
+        "compilerSettingsCacheFolder": "A:\\ASCode\\uChat3\\.cxx",
+        "sdkFolder": "D:\\Program\\Android\\SDK",
+        "isNativeCompilerSettingsCacheEnabled": false,
+        "isBuildOnlyTargetAbiEnabled": true,
+        "isCmakeBuildCohabitationEnabled": false,
+        "isPrefabEnabled": false,
+        "isV2NativeModelEnabled": true
+      },
+      "nativeBuildOutputLevel": "QUIET"
     },
-    "objFolder": "A:\\ASCode\\uChat3\\app\\build\\intermediates\\cmake\\release\\obj",
-    "variantName": "release",
-    "validAbiList": [
-      "ARMEABI_V7A",
-      "ARM64_V8A",
-      "X86",
-      "X86_64"
-    ],
-    "prefabDirectory": "A:\\ASCode\\uChat3\\app\\.cxx\\cmake\\release\\prefab",
-    "prefabPackageDirectoryList": []
+    "prefabDirectory": "A:\\ASCode\\uChat3\\app\\.cxx\\cmake\\release\\prefab"
+  },
+  "buildSettings": {
+    "environmentVariables": []
   },
   "prefabFolder": "A:\\ASCode\\uChat3\\app\\.cxx\\cmake\\release\\prefab\\x86_64"
 }

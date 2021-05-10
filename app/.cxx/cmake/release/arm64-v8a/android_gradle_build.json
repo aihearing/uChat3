@@ -1,133 +1,38 @@
 {
-  "stringTable": {
-    "0": "A:/ASCode/uChat3/app/.cxx/cmake/release/arm64-v8a",
-    "1": "--target=aarch64-none-linux-android23 --gcc-toolchain=D:/Program/Android/SDK/ndk/21.1.6352462/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=D:/Program/Android/SDK/ndk/21.1.6352462/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DWEBRTC_ANDROID -DWEBRTC_POSIX -Dnative_lib_EXPORTS -I../../../../src/main/cpp/vad_src -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -O2 -DNDEBUG -fPIC",
-    "2": "--target=aarch64-none-linux-android23 --gcc-toolchain=D:/Program/Android/SDK/ndk/21.1.6352462/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=D:/Program/Android/SDK/ndk/21.1.6352462/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DWEBRTC_ANDROID -DWEBRTC_POSIX -Dnative_lib_EXPORTS -I../../../../src/main/cpp/vad_src -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -Wall -pedantic -O2 -DNDEBUG -fPIC"
-  },
+  "stringTable": {},
   "buildFiles": [
-    "A:\\ASCode\\uChat3\\app\\CMakeLists.txt",
-    "D:\\Program\\Android\\SDK\\ndk\\21.1.6352462\\build\\cmake\\android.toolchain.cmake",
-    "D:\\Program\\Android\\SDK\\ndk\\21.1.6352462\\build\\cmake\\platforms.cmake"
+    "A:\\ASCode\\uChat3\\app\\CMakeLists.txt"
   ],
-  "cleanCommands": [
-    "D:\\Program\\Android\\SDK\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"A:\\ASCode\\uChat3\\app\\.cxx\\cmake\\release\\arm64-v8a\" clean"
+  "cleanCommandsComponents": [
+    [
+      "D:\\Program\\Android\\SDK\\cmake\\3.10.2.4988404\\bin\\ninja.exe",
+      "-C",
+      "A:\\ASCode\\uChat3\\app\\.cxx\\cmake\\release\\arm64-v8a",
+      "clean"
+    ]
   ],
-  "buildTargetsCommand": "D:\\Program\\Android\\SDK\\cmake\\3.10.2.4988404\\bin\\ninja.exe  -C \"A:\\ASCode\\uChat3\\app\\.cxx\\cmake\\release\\arm64-v8a\" {LIST_OF_TARGETS_TO_BUILD}",
+  "buildTargetsCommandComponents": [
+    "D:\\Program\\Android\\SDK\\cmake\\3.10.2.4988404\\bin\\ninja.exe",
+    "-C",
+    "A:\\ASCode\\uChat3\\app\\.cxx\\cmake\\release\\arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
   "libraries": {
     "native-lib-Release-arm64-v8a": {
-      "buildCommand": "D:\\Program\\Android\\SDK\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"A:\\ASCode\\uChat3\\app\\.cxx\\cmake\\release\\arm64-v8a\" native-lib",
+      "buildCommandComponents": [
+        "D:\\Program\\Android\\SDK\\cmake\\3.10.2.4988404\\bin\\ninja.exe",
+        "-C",
+        "A:\\ASCode\\uChat3\\app\\.cxx\\cmake\\release\\arm64-v8a",
+        "native-lib"
+      ],
       "buildType": "release",
-      "toolchain": "649888266",
       "abi": "arm64-v8a",
       "artifactName": "native-lib",
-      "files": [
-        {
-          "src": "A:\\ASCode\\uChat3\\app\\src\\main\\cpp\\native-lib.cpp",
-          "flagsOrdinal": 1,
-          "workingDirectoryOrdinal": 0
-        },
-        {
-          "src": "A:\\ASCode\\uChat3\\app\\src\\main\\cpp\\vad_src\\checks.cc",
-          "flagsOrdinal": 1,
-          "workingDirectoryOrdinal": 0
-        },
-        {
-          "src": "A:\\ASCode\\uChat3\\app\\src\\main\\cpp\\vad_src\\vad.cc",
-          "flagsOrdinal": 1,
-          "workingDirectoryOrdinal": 0
-        },
-        {
-          "src": "A:\\ASCode\\uChat3\\app\\src\\main\\cpp\\vad_src\\cross_correlation.c",
-          "flagsOrdinal": 2,
-          "workingDirectoryOrdinal": 0
-        },
-        {
-          "src": "A:\\ASCode\\uChat3\\app\\src\\main\\cpp\\vad_src\\division_operations.c",
-          "flagsOrdinal": 2,
-          "workingDirectoryOrdinal": 0
-        },
-        {
-          "src": "A:\\ASCode\\uChat3\\app\\src\\main\\cpp\\vad_src\\downsample_fast.c",
-          "flagsOrdinal": 2,
-          "workingDirectoryOrdinal": 0
-        },
-        {
-          "src": "A:\\ASCode\\uChat3\\app\\src\\main\\cpp\\vad_src\\energy.c",
-          "flagsOrdinal": 2,
-          "workingDirectoryOrdinal": 0
-        },
-        {
-          "src": "A:\\ASCode\\uChat3\\app\\src\\main\\cpp\\vad_src\\get_scaling_square.c",
-          "flagsOrdinal": 2,
-          "workingDirectoryOrdinal": 0
-        },
-        {
-          "src": "A:\\ASCode\\uChat3\\app\\src\\main\\cpp\\vad_src\\min_max_operations.c",
-          "flagsOrdinal": 2,
-          "workingDirectoryOrdinal": 0
-        },
-        {
-          "src": "A:\\ASCode\\uChat3\\app\\src\\main\\cpp\\vad_src\\resample_48khz.c",
-          "flagsOrdinal": 2,
-          "workingDirectoryOrdinal": 0
-        },
-        {
-          "src": "A:\\ASCode\\uChat3\\app\\src\\main\\cpp\\vad_src\\resample_by_2_internal.c",
-          "flagsOrdinal": 2,
-          "workingDirectoryOrdinal": 0
-        },
-        {
-          "src": "A:\\ASCode\\uChat3\\app\\src\\main\\cpp\\vad_src\\resample_fractional.c",
-          "flagsOrdinal": 2,
-          "workingDirectoryOrdinal": 0
-        },
-        {
-          "src": "A:\\ASCode\\uChat3\\app\\src\\main\\cpp\\vad_src\\spl_init.c",
-          "flagsOrdinal": 2,
-          "workingDirectoryOrdinal": 0
-        },
-        {
-          "src": "A:\\ASCode\\uChat3\\app\\src\\main\\cpp\\vad_src\\vad_core.c",
-          "flagsOrdinal": 2,
-          "workingDirectoryOrdinal": 0
-        },
-        {
-          "src": "A:\\ASCode\\uChat3\\app\\src\\main\\cpp\\vad_src\\vad_filterbank.c",
-          "flagsOrdinal": 2,
-          "workingDirectoryOrdinal": 0
-        },
-        {
-          "src": "A:\\ASCode\\uChat3\\app\\src\\main\\cpp\\vad_src\\vad_gmm.c",
-          "flagsOrdinal": 2,
-          "workingDirectoryOrdinal": 0
-        },
-        {
-          "src": "A:\\ASCode\\uChat3\\app\\src\\main\\cpp\\vad_src\\vad_sp.c",
-          "flagsOrdinal": 2,
-          "workingDirectoryOrdinal": 0
-        },
-        {
-          "src": "A:\\ASCode\\uChat3\\app\\src\\main\\cpp\\vad_src\\vector_scaling_operations.c",
-          "flagsOrdinal": 2,
-          "workingDirectoryOrdinal": 0
-        },
-        {
-          "src": "A:\\ASCode\\uChat3\\app\\src\\main\\cpp\\vad_src\\webrtc_vad.c",
-          "flagsOrdinal": 2,
-          "workingDirectoryOrdinal": 0
-        }
-      ],
-      "headers": [],
       "output": "A:\\ASCode\\uChat3\\app\\build\\intermediates\\cmake\\release\\obj\\arm64-v8a\\libnative-lib.so",
       "runtimeFiles": []
     }
   },
-  "toolchains": {
-    "649888266": {
-      "cCompilerExecutable": "D:\\Program\\Android\\SDK\\ndk\\21.1.6352462\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe",
-      "cppCompilerExecutable": "D:\\Program\\Android\\SDK\\ndk\\21.1.6352462\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
-    }
-  },
+  "toolchains": {},
   "cFileExtensions": [
     "c"
   ],

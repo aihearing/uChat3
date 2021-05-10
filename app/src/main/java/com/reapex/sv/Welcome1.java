@@ -1,45 +1,51 @@
 package com.reapex.sv;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.Html;
+import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.click.guide.guide_lib.GuideCustomViews;
-import com.click.guide.guide_lib.interfaces.CallBack;
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import com.huawei.agconnect.config.AGConnectServicesConfig;
 import com.huawei.hms.mlsdk.common.MLApplication;
 
-/**
- * 引导页
- */
-public class Welcome1 extends BaseActivity implements CallBack {
+public class Welcome1 extends BaseActivity {
 
     final String TAG = this.getClass().getSimpleName();
     static final String API_KEY = "client/api_key";     // huawei
 
-    private GuideCustomViews GuideCustomViews;
-    private TextView mNextTv;
-    private final int[] mPageImages = {
-            R.drawable.welcome1,
-            R.drawable.welcome2,
-            R.drawable.welcome3,
-            R.drawable.welcome4
-    };
+    private int currentItem;//current item of view pager
+    private int itemLength;//length item of view pager
+    private ViewPager viewPager;
+    private LinearLayout layoutDots;
+    private Button btnSkip, btnNext;
+    private ViewPagerAdapter adapter;   //adapter of viewPager
 
-    private final int[] mGuidePoint = {
-            R.drawable.icon_guide_point_select,
-            R.drawable.icon_guide_point_unselect
-    };
+    ImageView image;
+
+    private TextView mNextTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setApiKey();        // huawei
-
         MySP.getInstance().init(this);
         if(!MySP.getInstance().getWelcome().equals("")){
             Intent intent = new Intent(this, Welcome2Earth.class);
@@ -48,15 +54,66 @@ public class Welcome1 extends BaseActivity implements CallBack {
         }
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.a_welcome);
+        setContentView(R.layout.a_welcome1);
 
-        initView();
-    }
+        image = findViewById(R.id.background);
+        Drawable[] backgrounds = new Drawable[4];
+        backgrounds[0] = ContextCompat.getDrawable(this, R.drawable.welcome1);
+        backgrounds[1] = ContextCompat.getDrawable(this, R.drawable.welcome2);
+        backgrounds[2] = ContextCompat.getDrawable(this, R.drawable.welcome3);
+        backgrounds[3] = ContextCompat.getDrawable(this, R.drawable.welcome4);
 
-    private void initView() {
-        GuideCustomViews = findViewById(R.id.guide_CustomView);
-        GuideCustomViews.setData(mPageImages, mGuidePoint, this);
-        mNextTv = findViewById(R.id.next_tv);
+        statusBar();
+        viewPager  = findViewById(R.id.view_pager);
+        layoutDots = findViewById(R.id.layoutDots);
+        btnNext    = findViewById(R.id.btnNext);
+        btnSkip    = findViewById(R.id.btnSkip);
+        adapter    = new ViewPagerAdapter();
+        viewPager.setAdapter(adapter);
+        itemLength = viewPager.getAdapter().getCount();
+        showDots(viewPager.getCurrentItem());
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                image.setImageDrawable(backgrounds[position]);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                showDots(viewPager.getCurrentItem());
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                if (viewPager.getCurrentItem() == itemLength - 1){
+                    btnSkip.setVisibility(View.GONE);
+                    btnNext.setText(R.string.splash_enter);
+                } else {
+                    btnSkip.setVisibility(View.VISIBLE);
+                    btnNext.setText(R.string.next);
+                }
+            }
+        });
+
+        btnSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MySP.getInstance().setWelcome("ok");
+                goToHome();
+            }
+        });
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (viewPager.getCurrentItem() == itemLength - 1) {//got it
+                    MySP.getInstance().setWelcome("ok");
+                    goToHome();
+                } else {//next
+                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+                }
+            }
+        });
     }
 
     private void setApiKey(){
@@ -64,32 +121,60 @@ public class Welcome1 extends BaseActivity implements CallBack {
         MLApplication.getInstance().setApiKey(config.getString(API_KEY));
     }
 
-    @Override
-    public void callSlidingPosition(int position) {
-        Log.e("callSlidingPosition", "滑动位置 callSlidingPosition " + position);
-        if(position == 3){
-            mNextTv.setVisibility(View.VISIBLE);
-        }else{
-            mNextTv.setVisibility(View.INVISIBLE);
+    private void showDots(int pageNumber) {
+        TextView [] dots = new TextView[itemLength];
+        layoutDots.removeAllViews();
+        for (int i = 0; i< dots.length; i++) {
+            dots[i] = new TextView(this);
+            dots[i].setText(Html.fromHtml("&#8226;"));
+            dots[i].setTextSize(TypedValue.COMPLEX_UNIT_SP, 35);
+            dots[i].setTextColor(ContextCompat.getColor(this,
+                    (i == pageNumber ? R.color.dot_active : R.color.dot_incative)));
+            layoutDots.addView(dots[i]);
         }
     }
 
-    @Override
-    public void callSlidingLast() {
-        Log.e("callSlidingLast", "滑动到最后一个callSlidingLast");
+    private void goToHome() {
+        startActivity(new Intent(this, Welcome2Earth.class));
+        finish();
+    }
+
+    private void statusBar() {
+            Window window = getWindow();
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
     }
 
     @Override
-    public void onClickLastListener() {
-        Log.e("callSlidingLast", "click the last view");
-        MySP.getInstance().setWelcome("ok");
-        Intent intent = new Intent(Welcome1.this, Welcome2Earth.class);
-        startActivity(intent);
-        finish();
-    }
-    @Override
     protected void onDestroy() {
         super.onDestroy();
-        GuideCustomViews.clear();
+    }
+
+    public class ViewPagerAdapter extends PagerAdapter {
+
+        @NonNull
+        @Override
+        public Object instantiateItem(@NonNull ViewGroup container, int position) {
+            View view = LayoutInflater.from(Welcome1.this).inflate(R.layout.a_welcome, container, false);
+            container.addView(view);
+            return view;
+        }
+
+        @Override
+        public int getCount() {
+            return 4;
+        }
+
+        @Override
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+            return view == object;
+        }
+
+        @Override
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+            View view = (View) object;
+            container.removeView(view);
+        }
     }
 }

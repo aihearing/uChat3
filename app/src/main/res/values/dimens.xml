@@ -6,6 +6,8 @@
     <dimen name="home_middle_show_text_size">11sp</dimen>
     <dimen name="home_middle_show_title_text_size">20sp</dimen>
 
+    <dimen name="dots_height">30dp</dimen>
+    <dimen name="dots_margin_bottom">20dp</dimen>
 
     <dimen name="height_top_bar">48dp</dimen>
     <dimen name="padding_search_bar">5dp</dimen>
