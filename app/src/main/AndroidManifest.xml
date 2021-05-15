@@ -40,7 +40,7 @@
 
         <activity
             android:name=".Welcome1"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="fullSensor"  >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -49,98 +49,98 @@
         </activity>
         <activity
             android:name=".Welcome2Earth"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor" 
             android:theme="@style/ImageTranslucentTheme" />
         <activity
             android:name=".Login"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor" 
             android:theme="@style/ImageTranslucentTheme" />
         <activity
             android:name=".Register"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor" 
             android:theme="@style/ImageTranslucentTheme" />
         <activity
             android:name=".Welcome3Main"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor" 
             android:theme="@style/ImageTranslucentTheme" />
         <activity
             android:name=".asrshort.ChatListView"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor" 
             android:theme="@style/ChatActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".asrshort.ChatRecycler"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor" 
             android:theme="@style/ChatActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".asrlong.ChatVIP"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor" 
             android:theme="@style/ChatActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".frag3me.Setting"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor" 
             android:theme="@style/ImageTranslucentTheme" />
         <activity
             android:name=".frag3me.AccountSecurity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor" 
             android:theme="@style/ImageTranslucentTheme" />
         <activity
             android:name=".frag3me.Frag3MeProfile"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor" 
             android:theme="@style/ImageTranslucentTheme" />
         <activity
             android:name=".frag3me.CloseAccount"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor" 
             android:theme="@style/ImageTranslucentTheme" />
         <activity
             android:name=".frag3me.MeMore"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor" 
             android:theme="@style/ImageTranslucentTheme" />
         <activity
             android:name=".frag3me.ChangeName"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor" 
             android:theme="@style/ImageTranslucentTheme" />
         <activity
             android:name=".frag3me.MeMoreRegion"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor" 
             android:theme="@style/ImageTranslucentTheme" />
         <activity
             android:name=".frag3me.MeMoreSignature"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor" 
             android:theme="@style/ImageTranslucentTheme" />
         <activity
             android:name=".frag3me.MeMoreGender"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor" 
             android:theme="@style/ImageTranslucentTheme" />
         <activity
             android:name=".frag3me.About"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor" 
             android:theme="@style/ImageTranslucentTheme" />
         <activity
             android:name=".MyWeb"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor" 
             android:theme="@style/ImageTranslucentTheme" />
         <activity
             android:name=".frag3me.SVQRCode"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor" 
             android:theme="@style/ImageTranslucentTheme" />
         <activity
             android:name=".frag3me.Intro"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor" 
             android:theme="@style/ImageTranslucentTheme" />
         <activity
             android:name=".frag3me.ModifyPasswordActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor" 
             android:theme="@style/ImageTranslucentTheme" />
 
         <meta-data
             android:name="install_channel"
-            android:value="AppGallery">
+            android:value="YYB211">
         </meta-data>
 
     </application>

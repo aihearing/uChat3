@@ -124,7 +124,7 @@
             android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/scan_qr_code_and_add_friends"
+            android:text="@string/click_to_continue"
             android:textAlignment="center"
             android:textColor="#999999"
             android:textSize="14sp" />
