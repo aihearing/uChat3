@@ -1,0 +1,21 @@
+# ninja log v5
+87	478	642746223	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/resample_by_2_internal.c.o	53c8e922bdbc30e7
+53	496	642746224	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/cross_correlation.c.o	378e622f2940ae57
+70	513	642746224	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/energy.c.o	5097edbfd0391a5
+79	529	642746224	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/resample_48khz.c.o	bac5cc724df3fa5b
+75	545	642746224	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/division_operations.c.o	645942883d812abe
+63	561	642746224	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/get_scaling_square.c.o	5f4615ec6b8517b6
+66	601	642746224	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/downsample_fast.c.o	316f8e6c4b5eb062
+85	624	642746224	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/resample_fractional.c.o	dd559302e09b28a6
+529	749	642746224	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_gmm.c.o	7375b97f8bcc0466
+478	790	642746224	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/spl_init.c.o	7253410e2356645e
+624	983	642746224	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_sp.c.o	9c694c596b821234
+497	1002	642746224	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/min_max_operations.c.o	e27d303706e3d85a
+602	1015	642746224	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/webrtc_vad.c.o	8948cf0738ee7bf2
+561	1129	642746224	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_filterbank.c.o	853f2512c8edec15
+513	1165	642746224	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_core.c.o	b0fc58b4bd1615b1
+750	1271	642746224	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vector_scaling_operations.c.o	fd35c8a4fe084caa
+61	1416	642746224	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	269c1d0287958354
+545	1826	642746225	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad.cc.o	48207520f73871d6
+50	2037	642746225	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/checks.cc.o	3fb6c2c256d0b0e4
+2038	3102	642746226	../../../../build/intermediates/cmake/release/obj/arm64-v8a/libnative-lib.so	7b6f718639821c2d

@@ -1,0 +1,21 @@
+# ninja log v5
+29	490	642746230	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/resample_by_2_internal.c.o	6ba1eff4c0b35428
+15	512	642746230	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/energy.c.o	1c843d2e5aead156
+12	562	642746230	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/downsample_fast.c.o	ed636b9942937fee
+1	587	642746230	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/cross_correlation.c.o	d3bef5d2a8136d36
+19	616	642746230	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/get_scaling_square.c.o	4592fb015fcd7bef
+25	636	642746230	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/resample_48khz.c.o	bea98235220b1e69
+9	653	642746230	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/division_operations.c.o	d5f82ba708990137
+22	724	642746230	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/spl_init.c.o	b8a7cf21baee4eb2
+491	868	642746230	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/resample_fractional.c.o	d0bd453907f7d189
+513	1005	642746230	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/min_max_operations.c.o	4ca783ac55aea7
+636	1113	642746230	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_gmm.c.o	87271c1aa9c00552
+653	1195	642746231	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_sp.c.o	330e4903028627ad
+587	1255	642746231	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_core.c.o	7c4dffe04916c2a3
+868	1292	642746231	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/webrtc_vad.c.o	cc503963b3eee420
+562	1304	642746231	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_filterbank.c.o	416a8ba134cf5671
+726	1450	642746231	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vector_scaling_operations.c.o	e2be26494e2e4032
+7	1451	642746231	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	b7cde0a3b60d2543
+617	1987	642746231	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad.cc.o	8466645aa3810561
+5	2809	642746232	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/checks.cc.o	5edfb67c8641ead2
+2809	3738	642746233	../../../../build/intermediates/cmake/release/obj/x86_64/libnative-lib.so	736c79b588f5b2e5

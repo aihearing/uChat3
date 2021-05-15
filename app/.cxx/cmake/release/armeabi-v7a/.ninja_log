@@ -1,0 +1,21 @@
+# ninja log v5
+34	3489	642746220	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/downsample_fast.c.o	7142fa2e72b60fcb
+29	3613	642746220	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/division_operations.c.o	a00257ecd87d5388
+31	3630	642746220	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/energy.c.o	13916ed30e6ecd89
+49	3649	642746220	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/resample_48khz.c.o	601ad272be9af89b
+52	3667	642746220	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/spl_init.c.o	19938da691e23370
+46	3697	642746220	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/resample_by_2_internal.c.o	aed894bf3def12cb
+20	3714	642746220	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/cross_correlation.c.o	8cd1c39c69d50866
+38	3749	642746220	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/get_scaling_square.c.o	b11508bca3b2a171
+3650	3879	642746220	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_gmm.c.o	5bb2cf4109987c9
+3630	3967	642746221	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_filterbank.c.o	6b98d4936cce2c6b
+3613	3990	642746221	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/resample_fractional.c.o	8c0526ee00e206e3
+3601	4049	642746221	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/min_max_operations.c.o	8065c7809f1fc378
+3714	4135	642746221	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/webrtc_vad.c.o	1e39f12718c591d8
+3749	4204	642746221	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vector_scaling_operations.c.o	66201a6fd49918a
+3879	4222	642746221	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_sp.c.o	692a115df5a22828
+3697	4352	642746221	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_core.c.o	bf46a916c41d7555
+26	5089	642746222	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	f8dd80ddc2911d9b
+3668	5112	642746222	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad.cc.o	9173c0e3744f3946
+24	5218	642746222	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/checks.cc.o	6369fefaec9d2f4d
+5218	6197	642746223	../../../../build/intermediates/cmake/release/obj/armeabi-v7a/libnative-lib.so	ec0a261d4e53cb69

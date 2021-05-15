@@ -1,0 +1,21 @@
+# ninja log v5
+24	308	642746227	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/get_scaling_square.c.o	e66e1e9a71a72d35
+30	368	642746227	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/energy.c.o	b438e01df3d9b0ef
+17	389	642746227	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/cross_correlation.c.o	4eeea19c1c5fff06
+28	408	642746227	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/division_operations.c.o	efd01748755ff6de
+22	453	642746227	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/downsample_fast.c.o	549a8bc0aa58ad82
+33	472	642746227	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/spl_init.c.o	dbf76d92eb48eb59
+36	509	642746227	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/resample_48khz.c.o	b9f9ac6ad59672f2
+41	608	642746227	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/resample_by_2_internal.c.o	be2459f753c2cdf0
+390	755	642746227	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_gmm.c.o	f3eca48b7917a698
+309	847	642746227	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/min_max_operations.c.o	bead491a5303a337
+369	897	642746227	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/resample_fractional.c.o	b4c3fa5038f60c7c
+509	1048	642746227	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vector_scaling_operations.c.o	15a19e1df9aae148
+608	1061	642746227	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_sp.c.o	8b19d410c4dc1755
+453	1105	642746227	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_core.c.o	4b74646b0c82c7e3
+473	1140	642746227	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_filterbank.c.o	c0122a461c73d650
+755	1198	642746227	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/webrtc_vad.c.o	e0ce99d501c74b37
+19	1242	642746228	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	b478ad6bed2718ab
+409	2059	642746228	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad.cc.o	be63872fb832ec3
+14	2171	642746228	CMakeFiles/native-lib.dir/src/main/cpp/vad_src/checks.cc.o	c7ccd58b18a7cfec
+2171	3011	642746229	../../../../build/intermediates/cmake/release/obj/x86/libnative-lib.so	efae3f8de37fea6

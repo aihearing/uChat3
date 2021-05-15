@@ -1,0 +1,35 @@
+ninja: Entering directory `A:\ASCode\uChat3\app\.cxx\cmake\release\x86'
+[1/20] Building C object CMakeFiles/native-lib.dir/src/main/cpp/vad_src/get_scaling_square.c.o
+[2/20] Building C object CMakeFiles/native-lib.dir/src/main/cpp/vad_src/energy.c.o
+[3/20] Building C object CMakeFiles/native-lib.dir/src/main/cpp/vad_src/cross_correlation.c.o
+[4/20] Building C object CMakeFiles/native-lib.dir/src/main/cpp/vad_src/division_operations.c.o
+[5/20] Building C object CMakeFiles/native-lib.dir/src/main/cpp/vad_src/downsample_fast.c.o
+[6/20] Building C object CMakeFiles/native-lib.dir/src/main/cpp/vad_src/spl_init.c.o
+[7/20] Building C object CMakeFiles/native-lib.dir/src/main/cpp/vad_src/resample_48khz.c.o
+[8/20] Building C object CMakeFiles/native-lib.dir/src/main/cpp/vad_src/resample_by_2_internal.c.o
+[9/20] Building C object CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_gmm.c.o
+[10/20] Building C object CMakeFiles/native-lib.dir/src/main/cpp/vad_src/min_max_operations.c.o
+[11/20] Building C object CMakeFiles/native-lib.dir/src/main/cpp/vad_src/resample_fractional.c.o
+[12/20] Building C object CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vector_scaling_operations.c.o
+[13/20] Building C object CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_sp.c.o
+[14/20] Building C object CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_core.c.o
+../../../../src/main/cpp/vad_src/vad_core.c:166:7: warning: variable 'h0' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]
+  if (total_power > kMinEnergy) {
+      ^~~~~~~~~~~~~~~~~~~~~~~~
+../../../../src/main/cpp/vad_src/vad_core.c:462:6: note: uninitialized use occurs here
+  if(h0==0){
+     ^~
+../../../../src/main/cpp/vad_src/vad_core.c:166:3: note: remove the 'if' if its condition is always true
+  if (total_power > kMinEnergy) {
+  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../../../../src/main/cpp/vad_src/vad_core.c:128:13: note: initialize the variable 'h0' to silence this warning
+  int16_t h0, h1;
+            ^
+             = 0
+1 warning generated.
+[15/20] Building C object CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad_filterbank.c.o
+[16/20] Building C object CMakeFiles/native-lib.dir/src/main/cpp/vad_src/webrtc_vad.c.o
+[17/20] Building CXX object CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o
+[18/20] Building CXX object CMakeFiles/native-lib.dir/src/main/cpp/vad_src/vad.cc.o
+[19/20] Building CXX object CMakeFiles/native-lib.dir/src/main/cpp/vad_src/checks.cc.o
+[20/20] Linking CXX shared library ..\..\..\..\build\intermediates\cmake\release\obj\x86\libnative-lib.so
